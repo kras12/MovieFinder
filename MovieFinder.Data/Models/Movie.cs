@@ -3,10 +3,10 @@
 /// <summary>
 /// Contains information about a movie. 
 /// </summary>
-public class Movie
+public class Movie : IMovie
 {
     #region Properties
-    
+
     /// <summary>
     /// Returns true if it's an adult movie.
     /// </summary>
