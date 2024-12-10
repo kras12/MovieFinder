@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using MovieFinder.Data.Services;
 
 namespace MovieFinder
 {
@@ -7,6 +9,7 @@ namespace MovieFinder
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -14,6 +17,10 @@ namespace MovieFinder
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Configuration.AddUserSecrets<MainPage>();
+
+            builder.Services.AddSingleton<IMovieApiService, MovieApiService>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
