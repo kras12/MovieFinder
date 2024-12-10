@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains information about a movie. 
 /// </summary>
-public class Movie : IMovie
+public class Movie
 {
     #region Properties
 
