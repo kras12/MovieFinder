@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using MovieFinder.Data.Configuration;
 using MovieFinder.Data.Services;
 
 namespace MovieFinder
@@ -18,7 +19,7 @@ namespace MovieFinder
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Configuration.AddUserSecrets<MainPage>();
+            ConfigureApiToken(builder.Configuration);
 
             builder.Services.AddSingleton<IMovieApiService, MovieApiService>();
 
@@ -27,6 +28,18 @@ namespace MovieFinder
 #endif
 
             return builder.Build();
+        }
+
+        private static void ConfigureApiToken(IConfigurationBuilder configurationBuilder)
+        {
+            string apiKey = SecureStorage.GetAsync(ApiServiceConfigurationKeys.ApiTokenKey).GetAwaiter().GetResult() ?? throw new InvalidOperationException("Failed to find the Jmdb API Key"); ;
+
+            var inMemorySettings = new Dictionary<string, string?>()
+                {
+                    { ApiServiceConfigurationKeys.ApiTokenKey, apiKey }
+                };
+
+            configurationBuilder.AddInMemoryCollection(inMemorySettings);
         }
     }
 }

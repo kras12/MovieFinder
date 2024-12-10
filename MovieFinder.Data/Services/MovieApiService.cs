@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieFinder.Data.Configuration;
 using MovieFinder.Data.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -45,7 +46,7 @@ public class MovieApiService : IMovieApiService
     /// <exception cref="Exception"></exception>
     public MovieApiService(HttpClient httpClient, IConfiguration configuration)
     {
-        _apiToken = configuration["ApiToken"] ?? throw new Exception("Failed to find the API token");
+        _apiToken = configuration[ApiServiceConfigurationKeys.ApiTokenKey] ?? throw new Exception("Failed to find the API token");
         _httpClient = httpClient;
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
     }
