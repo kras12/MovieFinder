@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Logging;
 using MovieFinder.Data.Configuration;
 using MovieFinder.Data.Services;
+using MovieFinder.Mapping;
+using MovieFinder.Services;
+using MovieFinder.ViewModels;
 
 namespace MovieFinder
 {
@@ -21,10 +24,16 @@ namespace MovieFinder
 
             ConfigureApiToken(builder.Configuration);
 
+            builder.Services.AddAutoMapper(config => config.AddProfile<AutoMapperProfile>());
             builder.Services.AddSingleton<IMovieApiService, MovieApiService>();
+            builder.Services.AddSingleton<IMainPageViewModel, MainPageViewModel>();
+            builder.Services.AddSingleton<IMovieViewModelFactory, MovieViewModelFactory>();
+            builder.Services.AddSingleton<HttpClient, HttpClient>();
+            builder.Services.AddSingleton<IMovieToMovieViewModelConverter, MovieToMovieViewModelConverter>();
+            builder.Services.AddTransient<IMovieViewModel, MovieViewModel>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder", "MovieFinder\MovieFinder.csproj", "{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}"
 EndProject
@@ -15,6 +15,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F0A4A0C-4E9B-4A57-96FE-D3688828E0BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4B255F3-9734-48E7-A4B9-5F16AA2FC1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
