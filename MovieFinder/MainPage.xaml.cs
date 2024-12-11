@@ -1,10 +1,16 @@
-﻿namespace MovieFinder
+﻿using MovieFinder.ViewModels;
+
+namespace MovieFinder
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private readonly IMainPageViewModel _viewModel;
+
+        public MainPage(IMainPageViewModel viewModel)
         {
             InitializeComponent();
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
     }
 
