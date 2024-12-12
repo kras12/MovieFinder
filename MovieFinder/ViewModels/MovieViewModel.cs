@@ -99,7 +99,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public bool Adult
     {
         get => _adult;
-        init =>  SetProperty(ref _adult, value);
+        init => SetProperty(ref _adult, value);
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string BackdropPath
     {
         get => _backdropPath;
-        init =>  SetProperty(ref _backdropPath, ConstructImagePath(value));
+        init => SetProperty(ref _backdropPath, ConstructImagePath(value));
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public int Id
     {
         get => _id;
-        init =>  SetProperty(ref _id, value);
+        init => SetProperty(ref _id, value);
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string OriginalLanguage
     {
         get => _originalLanguage;
-        init =>  SetProperty(ref _originalLanguage, value);
+        init => SetProperty(ref _originalLanguage, value);
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string OriginalTitle
     {
         get => _originalTitle;
-        init =>  SetProperty(ref _originalTitle, value);
+        init => SetProperty(ref _originalTitle, value);
     }
 
     /// <summary>
@@ -163,7 +163,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string Overview
     {
         get => _overview;
-        init =>  SetProperty(ref _overview, value);
+        init => SetProperty(ref _overview, value);
     }
 
     /// <summary>
@@ -172,7 +172,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public double Popularity
     {
         get => _popularity;
-        init =>  SetProperty(ref _popularity, value);
+        init => SetProperty(ref _popularity, value);
     }
 
     /// <summary>
@@ -181,7 +181,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string PosterPath
     {
         get => _posterPath;
-        init =>  SetProperty(ref _posterPath, ConstructImagePath(value));
+        init => SetProperty(ref _posterPath, ConstructImagePath(value));
     }
 
     /// <summary>
@@ -190,7 +190,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string ReleaseDate
     {
         get => _releaseDate;
-        init =>  SetProperty(ref _releaseDate, value);
+        init => SetProperty(ref _releaseDate, value);
     }
 
     /// <summary>
@@ -199,7 +199,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string Title
     {
         get => _title;
-        init =>  SetProperty(ref _title, value);
+        init => SetProperty(ref _title, value);
     }
 
     /// <summary>
@@ -209,7 +209,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public bool Video
     {
         get => _video;
-        init =>  SetProperty(ref _video, value);
+        init => SetProperty(ref _video, value);
     }
 
     /// <summary>
@@ -218,7 +218,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public double VoteAverage
     {
         get => _voteAverage;
-        init =>  SetProperty(ref _voteAverage, value);
+        init => SetProperty(ref _voteAverage, value);
     }
 
     /// <summary>
@@ -227,7 +227,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public int VoteCount
     {
         get => _voteCount;
-        init =>  SetProperty(ref _voteCount, value);
+        init => SetProperty(ref _voteCount, value);
     }
 
     #endregion
