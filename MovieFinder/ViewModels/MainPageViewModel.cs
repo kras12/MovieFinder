@@ -69,5 +69,14 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         }
     }
 
+    [RelayCommand]
+    private async Task GetMovieDetails(IMovieViewModel movie)
+    {
+        await Shell.Current.GoToAsync(nameof(MovieDetailsPage), animate: true, new Dictionary<string, object>()
+        {
+            { nameof(IMovieDetailsPageViewModel.Movie),  movie}
+        });
+    }
+
     #endregion
 }

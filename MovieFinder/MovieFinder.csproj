@@ -75,7 +75,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Services\" />
+	  <Compile Update="MovieDetailsPage.xaml.cs">
+	    <DependentUpon>MovieDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="MovieDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+  
 </Project>

@@ -5,6 +5,8 @@
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(MovieDetailsPage), typeof(MovieDetailsPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         }
     }
 }
