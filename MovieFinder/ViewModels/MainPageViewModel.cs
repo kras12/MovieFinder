@@ -13,12 +13,11 @@ namespace MovieFinder.ViewModels;
 public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
 {
     #region Fields
-    
+
     /// <summary>
-    /// A collection of movies fetched from the API. 
+    /// The injected mapper. 
     /// </summary>
-    [ObservableProperty]
-    private ObservableCollection<IMovieViewModel> _movies = [];
+    private readonly IMapper _mapper;
 
     /// <summary>
     /// The injected movie API service. 
@@ -26,9 +25,10 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     private readonly IMovieApiService _movieApiService;
 
     /// <summary>
-    /// The injected mapper. 
+    /// A collection of movies fetched from the API. 
     /// </summary>
-    private readonly IMapper _mapper;
+    [ObservableProperty]
+    private ObservableCollection<IMovieViewModel> _movies = [];
 
     #endregion
 
