@@ -6,14 +6,12 @@
              x:Class="MovieFinder.MainPage"
              x:DataType="viewmodels:IMainPageViewModel"
              Title="Movie Finder">
-
     <Grid >
         <Grid.Padding>
             <OnPlatform Default="10"/>
         </Grid.Padding>
         <ScrollView>
-            <VerticalStackLayout>
-                <Button Text="Search movies" Command="{Binding SearchMoviesCommand}"/>
+            <VerticalStackLayout>                
                 <Button Text="Filter" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120"/>
                 <CollectionView ItemsSource="{Binding Movies}">
                     <CollectionView.ItemsLayout>

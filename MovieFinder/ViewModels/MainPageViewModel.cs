@@ -66,6 +66,8 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
 
         MovieSearchFilterViewModel.MovieCategories =
            new ObservableCollection<IMovieCategoryViewModel>(_mapper.Map<List<IMovieCategoryViewModel>>(_movieCategoryCacheService.GetAllCategories()));
+
+        SearchMovies();
     }
 
     #endregion
@@ -101,15 +103,18 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         IsMovieFiltersOpen = true;
     }
 
+    #endregion
+
+    #region Methods
+
     /// <summary>
-    /// The command to search movies. 
+    /// Searches for movies that fits the current filters. 
     /// </summary>
     /// <returns><see cref="Task"/></returns>
-    [RelayCommand]
     private async Task SearchMovies()
     {
         // TODO - Present filter options in the view. 
-        var response = await _movieApiService.SearchMovies(new MovieSearchFilter());
+        var response = await _movieApiService.SearchMovies(_mapper.Map<MovieSearchFilter>(MovieSearchFilterViewModel));
 
         if (response.IsSuccess && response.Data != null)
         {
