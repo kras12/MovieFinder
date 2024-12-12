@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using MovieFinder.Data.Configuration;
+using MovieFinder.Data.Dto;
 using MovieFinder.Data.Models;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
@@ -14,6 +17,11 @@ namespace MovieFinder.Data.Services;
 public class MovieApiService : IMovieApiService
 {
     #region Constants
+
+    /// <summary>
+    /// The API endpoint for movie category listing.
+    /// </summary>
+    private const string MovieCategoryListUrl = "https://api.themoviedb.org/3/genre/movie/list";
 
     /// <summary>
     /// The API endpoint for movie searches.
@@ -34,6 +42,11 @@ public class MovieApiService : IMovieApiService
     /// </summary>
     private readonly HttpClient _httpClient;
 
+    /// <summary>
+    /// The injected data mapper.
+    /// </summary>
+    private readonly IMapper _mapper;
+
     #endregion
 
     #region Constructors
@@ -44,16 +57,38 @@ public class MovieApiService : IMovieApiService
     /// <param name="httpClient">The injected HttpClient.</param>
     /// <param name="configuration">The injected configuration that contains the API token.</param>
     /// <exception cref="Exception"></exception>
-    public MovieApiService(HttpClient httpClient, IConfiguration configuration)
+    public MovieApiService(HttpClient httpClient, IConfiguration configuration, IMapper mapper)
     {
         _apiToken = configuration[ApiServiceConfigurationKeys.ApiTokenKey] ?? throw new Exception("Failed to find the API token");
         _httpClient = httpClient;
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
+        this._mapper = mapper;
     }
 
     #endregion
 
     #region Methods
+
+    /// <summary>
+    /// Gets all movie categories. 
+    /// </summary>
+    /// <returns>A collection of <see cref="MovieCategory"/>.</returns>
+    public async Task<ApiResponse<MovieCategoryCollection>> GetMovieCategories()
+    {
+        try
+        {
+            // TODO - Support different languages?
+            var response = await _httpClient.GetAsync($"{MovieCategoryListUrl}?language=en");
+            return await HandleResponse<MovieCategoryCollection>(response);
+        }
+        catch (Exception ex)
+        {
+            // TODO - Logging
+            Debug.WriteLine($"{ex.Message}");
+            Debug.WriteLine($"{ex.StackTrace}");
+            return CreateGeneralApiErrorResponse<MovieCategoryCollection>();
+        }
+    }
 
     /// <summary>
     /// Searches for movies according to the supplied filters.
@@ -65,14 +100,15 @@ public class MovieApiService : IMovieApiService
         try
         {
             var response = await _httpClient.GetAsync($"{MovieSearchUrl}{BuildSearchMovieQueryString(filter)}");
-            return await HandleResponse<MovieSearchResult>(response);
+            var resultDto = await HandleResponse<MovieSearchResultDto>(response);
+            return ConvertResponse<MovieSearchResultDto, MovieSearchResult>(resultDto);
         }
         catch (Exception ex)
         {
-            return new ApiResponse<MovieSearchResult>()
-            {
-                ApiError = CreateGeneralApiError()
-            };
+            // TODO - Logging
+            Debug.WriteLine($"{ex.Message}");
+            Debug.WriteLine($"{ex.StackTrace}");
+            return CreateGeneralApiErrorResponse<MovieSearchResult>();
         }
     }
 
@@ -105,6 +141,23 @@ public class MovieApiService : IMovieApiService
     }
 
     /// <summary>
+    /// Converts the API response from type <typeparamref name="TSource"/> to <typeparamref name="TDestination"/>.
+    /// </summary>
+    /// <typeparam name="TSource">The source type.</typeparam>
+    /// <typeparam name="TDestination">The destionation type.</typeparam>
+    /// <param name="sourceResponse">The source response to convert.</param>
+    /// <returns>A new <see cref="ApiResponse{T}"/>.</returns>
+    private ApiResponse<TDestination> ConvertResponse<TSource, TDestination>(ApiResponse<TSource> sourceResponse)
+        where TSource : class where TDestination : class
+    {
+        return new ApiResponse<TDestination>()
+        {
+            ApiError = sourceResponse.ApiError,
+            Data = sourceResponse.Data == null ? null : _mapper.Map<TSource, TDestination>(sourceResponse.Data)
+        };
+    }
+
+    /// <summary>
     /// Creates a deserialization <see cref="ApiError"/>.
     /// </summary>
     /// <returns><see cref="ApiError"/></returns>
@@ -120,6 +173,19 @@ public class MovieApiService : IMovieApiService
     private ApiError CreateGeneralApiError()
     {
         return new ApiError(errorCode: 0, "An unexpected error occurred while processing your request.");
+    }
+
+    /// <summary>
+    /// Creates a general API response of type T. 
+    /// </summary>
+    /// <typeparam name="T">The type of the response.</typeparam>
+    /// <returns><see cref="ApiResponse{T}"/></returns>
+    private ApiResponse<T> CreateGeneralApiErrorResponse<T>() where T: class
+    {
+        return new ApiResponse<T>()
+        {
+            ApiError = CreateGeneralApiError()
+        };
     }
 
     /// <summary>
@@ -152,8 +218,11 @@ public class MovieApiService : IMovieApiService
                 result.ApiError = await response.Content.ReadFromJsonAsync<ApiError>() ?? CreateDeSerializationApiError();
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            // TODO - Logging
+            Debug.WriteLine($"{ex.Message}");
+            Debug.WriteLine($"{ex.StackTrace}");
             result.ApiError = CreateGeneralApiError();
         }
 

@@ -1,9 +1,11 @@
-﻿namespace MovieFinder.Data.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace MovieFinder.Data.Dto;
 
 /// <summary>
 /// Contains information about a movie. 
 /// </summary>
-public class Movie
+internal class MovieDto
 {
     #region Properties
 
@@ -15,12 +17,14 @@ public class Movie
     /// <summary>
     /// Path to an image extracted from the movie. 
     /// </summary>
+    [JsonPropertyName("backdrop_path")]
     public string BackdropPath { get; init; } = "";
 
     /// <summary>
-    /// A collection of movie categories
+    /// A collection of moview category IDs. 
     /// </summary>
-    public List<MovieCategory> Categories { get; init; } = [];
+    [JsonPropertyName("genre_ids")]
+    public List<int> CategoryIds { get; init; } = [];
 
     /// <summary>
     /// The ID of the movie.
@@ -30,11 +34,13 @@ public class Movie
     /// <summary>
     /// The original language of the movie.
     /// </summary>
+    [JsonPropertyName("original_language")]
     public string OriginalLanguage { get; init; } = "";
 
     /// <summary>
     /// The original title of the move.
     /// </summary>
+    [JsonPropertyName("original_title")]
     public string OriginalTitle { get; init; } = "";
 
     /// <summary>
@@ -50,11 +56,13 @@ public class Movie
     /// <summary>
     /// Path to a poster image for the movie.
     /// </summary>
+    [JsonPropertyName("poster_path")]
     public string PosterPath { get; init; } = "";
 
     /// <summary>
     /// The release date for the movie.
     /// </summary>
+    [JsonPropertyName("release_date")]
     public string ReleaseDate { get; init; } = "";
 
     /// <summary>
@@ -71,11 +79,13 @@ public class Movie
     /// <summary>
     /// The average vote for the movie.
     /// </summary>
+    [JsonPropertyName("vote_average")]
     public double VoteAverage { get; init; }
 
     /// <summary>
     /// The number of votes for the movie. 
     /// </summary>
+    [JsonPropertyName("vote_count")]
     public int VoteCount { get; init; }
 
     #endregion
