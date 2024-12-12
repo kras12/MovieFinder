@@ -29,6 +29,7 @@ namespace MovieFinder
             builder.Services.AddSingleton<IMainPageViewModel, MainPageViewModel>();
             builder.Services.AddSingleton<HttpClient, HttpClient>();
             builder.Services.AddTransient<IMovieViewModel, MovieViewModel>();
+            builder.Services.AddTransient<IMovieCategoryViewModel, MovieCategoryViewModel>();
 
             builder.Services.AddDataLayerServices();
 

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MovieFinder.Data.Models;
-using MovieFinder.Services;
 using MovieFinder.ViewModels;
 
 namespace MovieFinder.Mapping;
@@ -30,5 +29,10 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Video, opt => opt.MapFrom(src => src.Video))
             .ForMember(dest => dest.VoteAverage, opt => opt.MapFrom(src => src.VoteAverage))
             .ForMember(dest => dest.VoteCount, opt => opt.MapFrom(src => src.VoteCount));
+
+        CreateMap<MovieCategory, IMovieCategoryViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
     }
 }
