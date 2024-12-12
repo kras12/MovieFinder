@@ -16,6 +16,19 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<Movie, IMovieViewModel>()
-            .ConvertUsing<IMovieToMovieViewModelConverter>();
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+            .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.Categories))
+            .ForMember(dest => dest.BackdropPath, opt => opt.MapFrom(src => src.BackdropPath))
+            .ForMember(dest => dest.PosterPath, opt => opt.MapFrom(src => src.PosterPath))
+            .ForMember(dest => dest.OriginalLanguage, opt => opt.MapFrom(src => src.OriginalLanguage))
+            .ForMember(dest => dest.OriginalTitle, opt => opt.MapFrom(src => src.OriginalTitle))
+            .ForMember(dest => dest.Overview, opt => opt.MapFrom(src => src.Overview))
+            .ForMember(dest => dest.Popularity, opt => opt.MapFrom(src => src.Popularity))
+            .ForMember(dest => dest.ReleaseDate, opt => opt.MapFrom(src => src.ReleaseDate))
+            .ForMember(dest => dest.Video, opt => opt.MapFrom(src => src.Video))
+            .ForMember(dest => dest.VoteAverage, opt => opt.MapFrom(src => src.VoteAverage))
+            .ForMember(dest => dest.VoteCount, opt => opt.MapFrom(src => src.VoteCount));
     }
 }

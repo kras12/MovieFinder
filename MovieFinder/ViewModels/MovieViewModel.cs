@@ -1,11 +1,12 @@
-﻿using MovieFinder.Data.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace MovieFinder.ViewModels;
 
 /// <summary>
 /// ViewModel class containing information about a movie.
 /// </summary>
-public partial class MovieViewModel : IMovieViewModel
+public partial class MovieViewModel : ObservableObject, IMovieViewModel
 {
     #region Constants
 
@@ -19,22 +20,74 @@ public partial class MovieViewModel : IMovieViewModel
     #region Fields
 
     /// <summary>
-    /// The wrapped movie. 
+    /// Backing field for property <see cref="Adult"/>.
     /// </summary>
-    private Movie _movie;
-
-    #endregion
-
-    #region Constructors
+    private bool _adult;
 
     /// <summary>
-    /// Constructor.
+    /// Backing field for property <see cref="BackdropPath"/>.
     /// </summary>
-    /// <param name="movie">The movie to wrap.</param>
-    public MovieViewModel(Movie movie)
-    {
-        _movie = movie;
-    }
+    private string _backdropPath = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="Categories"/>.
+    /// </summary>
+    private ObservableCollection<IMovieCategoryViewModel> _categories = [];
+
+    /// <summary>
+    /// Backing field for property <see cref="Id"/>.
+    /// </summary>
+    private int _id;
+
+    /// <summary>
+    /// Backing field for property <see cref="OriginalLanguage"/>.
+    /// </summary>
+    private string _originalLanguage = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="OriginalTitle"/>.
+    /// </summary>
+    private string _originalTitle = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="Overview"/>.
+    /// </summary>
+    private string _overview = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="Popularity"/>.
+    /// </summary>
+    private double _popularity;
+
+    /// <summary>
+    /// Backing field for property <see cref="PosterPath"/>.
+    /// </summary>
+    private string _posterPath = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="ReleaseDate"/>.
+    /// </summary>
+    private string _releaseDate = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="Title"/>.
+    /// </summary>
+    private string _title = "";
+
+    /// <summary>
+    /// Backing field for property <see cref="Video"/>.
+    /// </summary>
+    private bool _video;
+
+    /// <summary>
+    /// Backing field for property <see cref="VoteAverage"/>.
+    /// </summary>
+    private double _voteAverage;
+
+    /// <summary>
+    /// Backing field for property <see cref="VoteCount"/>.
+    /// </summary>
+    private int _voteCount;
 
     #endregion
 
@@ -43,73 +96,129 @@ public partial class MovieViewModel : IMovieViewModel
     /// <summary>
     /// Returns true if it's an adult movie.
     /// </summary>
-    public bool Adult => _movie.Adult;
+    public bool Adult
+    {
+        get => _adult;
+        init =>  SetProperty(ref _adult, value);
+    }
 
     /// <summary>
     /// Path to an image extracted from the movie.
     /// </summary>
-    public string BackdropPath => ConstructImagePath(_movie.BackdropPath);
+    public string BackdropPath
+    {
+        get => _backdropPath;
+        init =>  SetProperty(ref _backdropPath, ConstructImagePath(value));
+    }
 
     /// <summary>
-    /// A collection of genre IDs.
+    /// A collection of categories for the move.    
     /// </summary>
-    public List<int> GenreIds => _movie.GenreIds;
+    public ObservableCollection<IMovieCategoryViewModel> Categories
+    {
+        get => _categories;
+        init =>  SetProperty(ref _categories, value);
+    }
 
     /// <summary>
     /// The ID of the movie.
     /// </summary>
-    public int Id => _movie.Id;
+    public int Id
+    {
+        get => _id;
+        init =>  SetProperty(ref _id, value);
+    }
 
     /// <summary>
     /// The original language of the movie.
     /// </summary>
-    public string OriginalLanguage => _movie.OriginalLanguage;
+    public string OriginalLanguage
+    {
+        get => _originalLanguage;
+        init =>  SetProperty(ref _originalLanguage, value);
+    }
 
     /// <summary>
     /// The original title of the movie.
     /// </summary>
-    public string OriginalTitle => _movie.OriginalTitle;
+    public string OriginalTitle
+    {
+        get => _originalTitle;
+        init =>  SetProperty(ref _originalTitle, value);
+    }
 
     /// <summary>
     /// The overview of the movie.
     /// </summary>
-    public string Overview => _movie.Overview;
+    public string Overview
+    {
+        get => _overview;
+        init =>  SetProperty(ref _overview, value);
+    }
 
     /// <summary>
     /// The popularity of the movie.
     /// </summary>
-    public double Popularity => _movie.Popularity;
+    public double Popularity
+    {
+        get => _popularity;
+        init =>  SetProperty(ref _popularity, value);
+    }
 
     /// <summary>
     /// Path to a poster image for the movie.
     /// </summary>
-    public string PosterPath => ConstructImagePath(_movie.PosterPath);
+    public string PosterPath
+    {
+        get => _posterPath;
+        init =>  SetProperty(ref _posterPath, ConstructImagePath(value));
+    }
 
     /// <summary>
     /// The release date for the movie.
     /// </summary>
-    public string ReleaseDate => _movie.ReleaseDate;
+    public string ReleaseDate
+    {
+        get => _releaseDate;
+        init =>  SetProperty(ref _releaseDate, value);
+    }
 
     /// <summary>
     /// The title of the movie.
     /// </summary>
-    public string Title => _movie.Title;
+    public string Title
+    {
+        get => _title;
+        init =>  SetProperty(ref _title, value);
+    }
 
     /// <summary>
     /// Returns true if it's not a movie, but other types of video material.
     /// Examples can be compilations, filmed sport events, fitness videos, how-to DVDs, etc.
     /// </summary>
-    public bool Video => _movie.Video;
+    public bool Video
+    {
+        get => _video;
+        init =>  SetProperty(ref _video, value);
+    }
 
     /// <summary>
     /// The average vote for the movie.
     /// </summary>
-    public double VoteAverage => _movie.VoteAverage;
+    public double VoteAverage
+    {
+        get => _voteAverage;
+        init =>  SetProperty(ref _voteAverage, value);
+    }
 
     /// <summary>
     /// The number of votes for the movie.
     /// </summary>
-    public int VoteCount => _movie.VoteCount;
+    public int VoteCount
+    {
+        get => _voteCount;
+        init =>  SetProperty(ref _voteCount, value);
+    }
 
     #endregion
 
