@@ -117,8 +117,18 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public ObservableCollection<IMovieCategoryViewModel> Categories
     {
         get => _categories;
-        init =>  SetProperty(ref _categories, value);
+
+        init
+        {
+            SetProperty(ref _categories, value);
+            OnPropertyChanged(nameof(CategoriesString));
+        }
     }
+
+    /// <summary>
+    /// The categories as a comma seperated string.
+    /// </summary>
+    public string CategoriesString => string.Join(", ", Categories.Select(x => x.Name).Order());
 
     /// <summary>
     /// The ID of the movie.

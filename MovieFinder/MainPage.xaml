@@ -37,20 +37,22 @@
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Language: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Padding="5" Text="{Binding OriginalLanguage}"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Release date: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ReleaseDate}"/>
-                                        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DescriptionColumn}" BackgroundColor="LightGray" Text="Popularity: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Popularity}"/>
-                                        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Average vote: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding VoteAverage}"/>
-                                        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Votes: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding VoteCount}"/>
+                                        <Label Grid.Row="0" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Categories: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Padding="5" Text="{Binding CategoriesString}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Language: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Padding="5" Text="{Binding OriginalLanguage}"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Release date: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding ReleaseDate}"/>
+                                        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DescriptionColumn}" BackgroundColor="LightGray" Text="Popularity: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Popularity}"/>
+                                        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Average vote: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding VoteAverage}"/>
+                                        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Votes: " FontAttributes="Bold"/>
+                                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding VoteCount}"/>
                                     </Grid>
                                 </Border>
-
                                 <VerticalStackLayout Margin="0,0,0,0">
                                     <Label Grid.Row="4" Grid.Column="0" Text="Overview: " FontAttributes="Bold"/>
                                     <Label Grid.Row="4" Grid.Column="1" Text="{Binding Overview}"/>
