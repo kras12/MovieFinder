@@ -65,6 +65,24 @@ public class MovieCategoryCacheService : IMovieCategoryCacheService, IDataLayerM
     #region Methods
 
     /// <summary>
+    /// Returns all movie categories.
+    /// </summary>
+    /// <returns>A collection of <see cref="MovieCategory"/>.</returns>
+    public List<MovieCategory> GetAllCategories()
+    {
+        try
+        {
+            _initializeMovieCategoriesTask.GetAwaiter().GetResult();
+            _categoryLookupSemaphore.Wait();
+            return _categoryLookup.Values.ToList();
+        }
+        finally
+        {
+            _categoryLookupSemaphore.Release();
+        }
+    }
+
+    /// <summary>
     /// Attempts to return a matching movie category. 
     /// </summary>
     /// <param name="movieCategoryId">The ID of the movie category to match.</param>

@@ -14,6 +14,7 @@
         <ScrollView>
             <VerticalStackLayout>
                 <Button Text="Search movies" Command="{Binding SearchMoviesCommand}"/>
+                <Button Text="Filter" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120"/>
                 <CollectionView ItemsSource="{Binding Movies}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"></LinearItemsLayout>
@@ -80,5 +81,15 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
+        
+        <ContentView IsVisible="{Binding IsMovieFiltersOpen}">
+            <Border Padding="10" BackgroundColor="LightBlue">
+                <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
+                    <Picker Title="Filter by XXX" ItemsSource="{Binding MovieSearchFilterViewModel.MovieCategories}" 
+                            ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilterViewModel.WithCategory}"/>
+                    <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
+                </VerticalStackLayout>                
+            </Border>
+        </ContentView>
     </Grid>
 </ContentPage>

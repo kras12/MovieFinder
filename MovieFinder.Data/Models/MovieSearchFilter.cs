@@ -34,5 +34,10 @@ public class MovieSearchFilter
     /// </summary>
     public string SortBy { get; set; } = "popularity.desc";
 
+    /// <summary>
+    /// Filters the movies by category ID.
+    /// </summary>
+    public int? WithCategory { get; set; }
+
     #endregion
 }

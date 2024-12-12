@@ -34,5 +34,8 @@ public class AutoMapperProfile : Profile
             .ConstructUsingServiceLocator()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+        CreateMap<IMovieSearchFilterViewModel, MovieSearchFilter>()
+            .ForMember(dest => dest.WithCategory, opt => opt.MapFrom(src => src.WithCategory != null ? src.WithCategory.Id : (int?)null));
     }
 }

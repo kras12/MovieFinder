@@ -9,6 +9,12 @@ namespace MovieFinder.Data.Services;
 public interface IMovieCategoryCacheService
 {
     /// <summary>
+    /// Returns all movie categories.
+    /// </summary>
+    /// <returns>A collection of <see cref="MovieCategory"/>.</returns>
+    List<MovieCategory> GetAllCategories();
+
+    /// <summary>
     /// Attempts to return a matching movie category. 
     /// </summary>
     /// <param name="movieCategoryId">The ID of the movie category to match.</param>

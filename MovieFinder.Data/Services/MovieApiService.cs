@@ -133,9 +133,14 @@ public class MovieApiService : IMovieApiService
 
         stringBuilder.Append("?");
         stringBuilder.Append($"include_video={BooleanToString(filter.IncludeVideo)}");
-        stringBuilder.Append($"include_adult={BooleanToString(filter.IncludeAdult)}");
-        stringBuilder.Append($"language={filter.Language}");
-        stringBuilder.Append($"sort_by={filter.SortBy}");
+        stringBuilder.Append($"&include_adult={BooleanToString(filter.IncludeAdult)}");
+        stringBuilder.Append($"&language={filter.Language}");
+        stringBuilder.Append($"&sort_by={filter.SortBy}");
+
+        if (filter.WithCategory.HasValue)
+        {
+            stringBuilder.Append($"&with_genres={filter.WithCategory.Value}");
+        }
 
         return stringBuilder.ToString();
     }
