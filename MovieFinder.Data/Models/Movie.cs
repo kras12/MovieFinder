@@ -15,7 +15,7 @@ public class Movie
     /// <summary>
     /// Path to an image extracted from the movie. 
     /// </summary>
-    public string BackdropPath { get; init; } = "";
+    public string? BackdropPath { get; init; } = "";
 
     /// <summary>
     /// A collection of movie categories

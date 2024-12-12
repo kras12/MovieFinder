@@ -27,7 +27,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     /// <summary>
     /// Backing field for property <see cref="BackdropPath"/>.
     /// </summary>
-    private string _backdropPath = "";
+    private string? _backdropPath = "";
 
     /// <summary>
     /// Backing field for property <see cref="Categories"/>.
@@ -105,10 +105,17 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     /// <summary>
     /// Path to an image extracted from the movie.
     /// </summary>
-    public string BackdropPath
+    public string? BackdropPath
     {
-        get => _backdropPath;
-        init => SetProperty(ref _backdropPath, ConstructImagePath(value));
+        get
+        {
+            return _backdropPath;
+        }
+
+        init
+    {
+            SetProperty(ref _backdropPath, value != null ? ConstructImagePath(value) : null);
+        }
     }
 
     /// <summary>

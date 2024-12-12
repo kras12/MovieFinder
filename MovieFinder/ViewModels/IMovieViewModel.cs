@@ -15,7 +15,7 @@ public interface IMovieViewModel
     /// <summary>
     /// Path to an image extracted from the movie.
     /// </summary>
-    string BackdropPath { get; init; }
+    string? BackdropPath { get; init; }
 
     /// <summary>
     /// A collection of categories for the move. 
