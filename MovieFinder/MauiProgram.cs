@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MovieFinder.Data.Configuration;
+using MovieFinder.Data.Extensions;
 using MovieFinder.Data.Services;
 using MovieFinder.Mapping;
 using MovieFinder.Services;
@@ -31,6 +32,8 @@ namespace MovieFinder
             builder.Services.AddSingleton<HttpClient, HttpClient>();
             builder.Services.AddSingleton<IMovieToMovieViewModelConverter, MovieToMovieViewModelConverter>();
             builder.Services.AddTransient<IMovieViewModel, MovieViewModel>();
+
+            builder.Services.AddDataLayerServices();
 
 #if DEBUG
             builder.Logging.AddDebug();
