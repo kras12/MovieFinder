@@ -1,4 +1,6 @@
-﻿namespace MovieFinder.Data.Dto;
+﻿using System.Text.Json.Serialization;
+
+namespace MovieFinder.Data.Dto;
 
 /// <summary>
 /// Contains the search result from a movie search.
@@ -20,11 +22,13 @@ internal class MovieSearchResultDto
     /// <summary>
     /// The total number of search result pages available for this search.
     /// </summary>
+    [JsonPropertyName("total_pages")]
     public int TotalPages { get; init; }
 
     /// <summary>
     /// The total number of movies found for this search. 
     /// </summary>
+    [JsonPropertyName("total_results")]
     public int TotalResults { get; init; }
 
     #endregion
