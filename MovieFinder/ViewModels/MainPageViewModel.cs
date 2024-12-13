@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Data.Models;
 using MovieFinder.Data.Services;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MovieFinder.ViewModels;
 
@@ -18,7 +19,7 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// Contains the data for filtering the movie listing.
     /// </summary>
     [ObservableProperty]
-    public IMovieSearchFilterViewModel _movieSearchFilterViewModel;
+    public IMovieSearchFilterViewModel _movieSearchFilter;
 
     /// <summary>
     /// The injected mapper. 
@@ -41,11 +42,11 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     [ObservableProperty]
     private bool _isMovieFiltersOpen;
 
+
     /// <summary>
-    /// A collection of movies fetched from the API. 
+    /// Backing field for property <see cref="Data.Models.MovieSearchResult"/>.
     /// </summary>
-    [ObservableProperty]
-    private ObservableCollection<IMovieViewModel> _movies = [];
+    private IMovieSearchResultViewModel _movieSearchResult;
 
     #endregion
 
@@ -57,17 +58,18 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// <param name="movieApiService">The injected movie API service.</param>
     /// <param name="mapper">The injected mapper.</param>
     /// <param name="movieCategoryCacheService">The injected movie category cache service.</param>
-    public MainPageViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService, IMovieSearchFilterViewModel movieSearchFilterViewModel)
+    public MainPageViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService, IMovieSearchFilterViewModel movieSearchFilterViewModel, IMovieSearchResultViewModel movieSearchResult)
     {
         _movieApiService = movieApiService;
         _mapper = mapper;
         _movieCategoryCacheService = movieCategoryCacheService;
-        _movieSearchFilterViewModel = movieSearchFilterViewModel;
+        _movieSearchFilter = movieSearchFilterViewModel;
+        MovieSearchResult = movieSearchResult;
 
-        MovieSearchFilterViewModel.MovieCategories =
+        MovieSearchFilter.MovieCategories =
            new ObservableCollection<IMovieCategoryViewModel>(_mapper.Map<List<IMovieCategoryViewModel>>(_movieCategoryCacheService.GetAllCategories()));
 
-        SearchMovies();
+        SearchMovies();        
     }
 
     #endregion
@@ -93,6 +95,33 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         });
     }
 
+    /// <summary>
+    /// Requests the next page using the current search filters. 
+    /// </summary>
+    /// <returns><see cref="Task"/></returns>
+    [RelayCommand(CanExecute = nameof(CanGetNextMovieSearchPage))]
+    private async Task GetNextMovieSearchPage()
+    {
+        if (MovieSearchResult.HaveNextPages)
+        {
+            MovieSearchFilter.Page = MovieSearchResult.Page + 1;
+            await SearchMovies();
+        }
+    }
+
+    /// <summary>
+    /// Requests the previous page using the current search filters. 
+    /// </summary>
+    /// <returns><see cref="Task"/></returns>
+    [RelayCommand(CanExecute = nameof(CanGetPreviousMovieSearchPage))]
+    private async Task GetPreviousMovieSearchPage()
+    {
+        if (MovieSearchResult.HavePreviousPages)
+        {
+            MovieSearchFilter.Page = MovieSearchResult.Page - 1;
+            await SearchMovies();
+        }
+    }
 
     /// <summary>
     /// Opens the movie filters view.
@@ -105,7 +134,44 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
 
     #endregion
 
+    #region Properties
+
+    /// <summary>
+    /// Contains the result from a movie search.
+    /// </summary>
+    public IMovieSearchResultViewModel MovieSearchResult
+    {
+        get => _movieSearchResult;
+
+        set
+        {
+            SetProperty(ref _movieSearchResult, value);
+            GetNextMovieSearchPageCommand.NotifyCanExecuteChanged();
+            GetPreviousMovieSearchPageCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    #endregion
+
     #region Methods
+
+    /// <summary>
+    /// Checks whether the <see cref="GetNextMovieSearchPageCommand"/> can be executed.
+    /// </summary>
+    /// <returns>True if the command can be executed.</returns>
+    private bool CanGetNextMovieSearchPage()
+    {
+        return MovieSearchResult.HaveNextPages;
+    }
+
+    /// <summary>
+    /// Checks whether the <see cref="GetPreviousMovieSearchPageCommand"/> can be executed.
+    /// </summary>
+    /// <returns>True if the command can be executed.</returns>
+    private bool CanGetPreviousMovieSearchPage()
+    {
+        return MovieSearchResult.HavePreviousPages;
+    }
 
     /// <summary>
     /// Searches for movies that fits the current filters. 
@@ -113,16 +179,22 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// <returns><see cref="Task"/></returns>
     private async Task SearchMovies()
     {
-        // TODO - Present filter options in the view. 
-        var response = await _movieApiService.SearchMovies(_mapper.Map<MovieSearchFilter>(MovieSearchFilterViewModel));
+        try
+        {
+            var response = await _movieApiService.SearchMovies(_mapper.Map<MovieSearchFilter>(MovieSearchFilter));
 
-        if (response.IsSuccess && response.Data != null)
-        {
-            Movies = new ObservableCollection<IMovieViewModel>(_mapper.Map<List<IMovieViewModel>>(response.Data.Results));
+            if (response.IsSuccess && response.Data != null)
+            {
+                MovieSearchResult = _mapper.Map<IMovieSearchResultViewModel>(response.Data);
+            }
+            else
+            {
+                // TODO - Implement error handling
+            }
         }
-        else
+        catch (Exception ex)
         {
-            // TODO - Implement error handling
+            Debug.WriteLine($"Error when searching for movies: {ex.Message}");
         }
     }
 

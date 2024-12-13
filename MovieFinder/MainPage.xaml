@@ -6,26 +6,42 @@
              x:Class="MovieFinder.MainPage"
              x:DataType="viewmodels:IMainPageViewModel"
              Title="Movie Finder">
-    <Grid >
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.Padding>
             <OnPlatform Default="10"/>
         </Grid.Padding>
-        <ScrollView>
-            <VerticalStackLayout>                
-                <Button Text="Filter" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120"/>
-                <CollectionView ItemsSource="{Binding Movies}">
-                    <CollectionView.ItemsLayout>
+
+        <!-- Menu panel -->
+        <VerticalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="20">
+                <Button Text="Filter" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120" BackgroundColor="#074799"/>
+            </HorizontalStackLayout>            
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,-6,0,0">
+                <ImageButton Source="arrow_bubble_left.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding GetPreviousMovieSearchPageCommand}"/>
+                <Label VerticalOptions="Center" Text="{Binding MovieSearchResult.PaginationText}"/>
+                <ImageButton Source="arrow_bubble_right.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding GetNextMovieSearchPageCommand}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        
+        <!-- Movie listing -->
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding MovieSearchResult.Results}" Margin="0,-10,0,0">
+                <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"></LinearItemsLayout>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="viewmodels:MovieViewModel">
-                            <Border Padding="10">
+                        <Border Padding="20" Margin="0" StrokeThickness="2">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Path=GetMovieDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMainPageViewModel}}}" CommandParameter="{Binding}"/>
                                 </Border.GestureRecognizers>
                                 <Border.Behaviors>
                                     <toolkit:TouchBehavior DefaultAnimationDuration="250" DefaultAnimationEasing="{x:Static Easing.CubicInOut}" PressedOpacity="0.6" PressedScale="0.8"
-                                                       HoveredBackgroundColor="#B0C4DE" PressedBackgroundColor="#4169E1"/>
+                                        HoveredBackgroundColor="#B0C4DE" PressedBackgroundColor="#4169E1"/>
                                 </Border.Behaviors>
 
                                 <VerticalStackLayout Spacing="10">
@@ -77,14 +93,13 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </VerticalStackLayout>
-        </ScrollView>
+        </ScrollView>        
         
         <ContentView IsVisible="{Binding IsMovieFiltersOpen}">
             <Border Padding="10" BackgroundColor="LightBlue">
                 <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
-                    <Picker Title="Filter by XXX" ItemsSource="{Binding MovieSearchFilterViewModel.MovieCategories}" 
-                            ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilterViewModel.WithCategory}"/>
+                    <Picker Title="Filter by XXX" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" 
+                            ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
                     <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
                 </VerticalStackLayout>                
             </Border>

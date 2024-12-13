@@ -136,6 +136,7 @@ public class MovieApiService : IMovieApiService
         stringBuilder.Append($"&include_adult={BooleanToString(filter.IncludeAdult)}");
         stringBuilder.Append($"&language={filter.Language}");
         stringBuilder.Append($"&sort_by={filter.SortBy}");
+        stringBuilder.Append($"&page={filter.Page}");
 
         if (filter.WithCategory.HasValue)
         {

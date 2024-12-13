@@ -13,6 +13,11 @@ public interface IMovieSearchFilterViewModel
     public ObservableCollection<IMovieCategoryViewModel> MovieCategories { get; set; }
 
     /// <summary>
+    /// The page of the search result being requested. 
+    /// </summary>
+    public int Page { get; set; }
+
+    /// <summary>
     /// Filters the movies by category
     /// </summary>
     public IMovieCategoryViewModel? WithCategory { get; set; }

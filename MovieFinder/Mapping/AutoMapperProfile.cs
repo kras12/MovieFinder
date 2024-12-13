@@ -37,5 +37,12 @@ public class AutoMapperProfile : Profile
 
         CreateMap<IMovieSearchFilterViewModel, MovieSearchFilter>()
             .ForMember(dest => dest.WithCategory, opt => opt.MapFrom(src => src.WithCategory != null ? src.WithCategory.Id : (int?)null));
+
+        CreateMap<MovieSearchResult, IMovieSearchResultViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.Page, opt => opt.MapFrom(src => src.Page))
+            .ForMember(dest => dest.Results, opt => opt.MapFrom(src => src.Results))
+            .ForMember(dest => dest.TotalPages, opt => opt.MapFrom(src => src.TotalPages))
+            .ForMember(dest => dest.TotalResults, opt => opt.MapFrom(src => src.TotalResults));
     }
 }

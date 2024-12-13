@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MovieFinder.ViewModels;
 
@@ -14,19 +14,29 @@ public interface IMainPageViewModel
     public IAsyncRelayCommand ApplyMovieFiltersCommand { get; }
 
     /// <summary>
+    /// Requests the next page using the current search filters. 
+    /// </summary>
+    public IAsyncRelayCommand GetNextMovieSearchPageCommand { get; }
+
+    /// <summary>
+    /// Requests the previous page using the current search filters. 
+    /// </summary>
+    public IAsyncRelayCommand GetPreviousMovieSearchPageCommand { get; }
+
+    /// <summary>
     /// Returns true if the movie filters view is open. 
     /// </summary>
     public bool IsMovieFiltersOpen { get; set; }
 
     /// <summary>
-    /// A collection of movies fetched from the API. 
-    /// </summary>
-    public ObservableCollection<IMovieViewModel> Movies { get; set; }
-
-    /// <summary>
     /// Contains the data for filtering the movie listing.
     /// </summary>
-    public IMovieSearchFilterViewModel MovieSearchFilterViewModel { get; }
+    public IMovieSearchFilterViewModel MovieSearchFilter { get; }
+
+    /// <summary>
+    /// Contains the result from a movie search.
+    /// </summary>
+    public IMovieSearchResultViewModel MovieSearchResult { get; }
 
     /// <summary>
     /// Opens the movie filters view.

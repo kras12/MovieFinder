@@ -35,6 +35,7 @@ namespace MovieFinder
             builder.Services.AddTransient<IMovieCategoryViewModel, MovieCategoryViewModel>();
             builder.Services.AddTransient<IMovieDetailsPageViewModel, MovieDetailsPageViewModel>();
             builder.Services.AddTransient<IMovieSearchFilterViewModel, MovieSearchFilterViewModel>();
+            builder.Services.AddTransient<IMovieSearchResultViewModel, MovieSearchResultViewModel>();
 
             builder.Services.AddDataLayerServices();
 
