@@ -9,6 +9,11 @@ namespace MovieFinder.Data.Services;
 public interface IMovieApiService
 {
     /// <summary>
+    /// The max page number request allowed by the api when searching for movies. 
+    /// </summary>
+    public int MaxNumberForPageRequest { get; }
+
+    /// <summary>
     /// Gets all movie categories. 
     /// </summary>
     /// <returns>A collection of <see cref="MovieCategory"/>.</returns>

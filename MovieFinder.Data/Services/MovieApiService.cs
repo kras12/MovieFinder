@@ -19,6 +19,11 @@ public class MovieApiService : IMovieApiService
     #region Constants
 
     /// <summary>
+    /// The max page number allowed by the api when searching for movies. 
+    /// </summary>
+    private const int MaxPageNumberAllowedByApi = 500;
+
+    /// <summary>
     /// The API endpoint for movie category listing.
     /// </summary>
     private const string MovieCategoryListUrl = "https://api.themoviedb.org/3/genre/movie/list";
@@ -64,6 +69,15 @@ public class MovieApiService : IMovieApiService
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken);
         this._mapper = mapper;
     }
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// The max page number request allowed by the api when searching for movies. 
+    /// </summary>
+    public int MaxNumberForPageRequest => MaxPageNumberAllowedByApi;
 
     #endregion
 
