@@ -6,6 +6,7 @@ using MovieFinder.Data.Configuration;
 using MovieFinder.Data.Extensions;
 using MovieFinder.Data.Services;
 using MovieFinder.Database.Context;
+using MovieFinder.Database.Repositories;
 using MovieFinder.Mapping;
 using MovieFinder.Shared.Helpers;
 using MovieFinder.ViewModels;
@@ -35,6 +36,7 @@ namespace MovieFinder
             builder.Services.AddSingleton<IMovieDiscoveryViewModel, MovieDiscoveryViewModel>();
             builder.Services.AddSingleton<HttpClient, HttpClient>();
             builder.Services.AddSingleton<IMovieCategoryCacheService, MovieCategoryCacheService>();
+            builder.Services.AddSingleton<IWatchedMoviesRepository, WatchedMoviesRepository>();
             builder.Services.AddTransient<IMovieViewModel, MovieViewModel>();
             builder.Services.AddTransient<IMovieCategoryViewModel, MovieCategoryViewModel>();
             builder.Services.AddTransient<IMovieDetailsPageViewModel, MovieDetailsPageViewModel>();
