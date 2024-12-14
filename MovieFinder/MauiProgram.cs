@@ -6,6 +6,7 @@ using MovieFinder.Data.Extensions;
 using MovieFinder.Data.Services;
 using MovieFinder.Mapping;
 using MovieFinder.ViewModels;
+using MovieFinder.ViewModels.Interfaces;
 
 namespace MovieFinder
 {

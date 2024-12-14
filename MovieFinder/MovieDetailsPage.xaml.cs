@@ -1,4 +1,4 @@
-using MovieFinder.ViewModels;
+using MovieFinder.ViewModels.Interfaces;
 
 namespace MovieFinder;
 

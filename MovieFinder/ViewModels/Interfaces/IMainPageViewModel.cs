@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace MovieFinder.ViewModels;
+namespace MovieFinder.ViewModels.Interfaces;
 
 /// <summary>
 /// Interface for a view model class for the main page. 

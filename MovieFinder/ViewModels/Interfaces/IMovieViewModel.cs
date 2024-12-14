@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace MovieFinder.ViewModels;
+namespace MovieFinder.ViewModels.Interfaces;
 
 /// <summary>
 /// Interface for ViewModel containing information about a movie.

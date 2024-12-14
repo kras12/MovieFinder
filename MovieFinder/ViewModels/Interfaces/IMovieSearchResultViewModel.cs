@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace MovieFinder.ViewModels;
+namespace MovieFinder.ViewModels.Interfaces;
 
 /// <summary>
 /// Interface for a mview model that Contains the search result from a movie search.

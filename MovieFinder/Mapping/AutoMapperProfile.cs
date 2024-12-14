@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MovieFinder.Data.Models;
-using MovieFinder.ViewModels;
+using MovieFinder.ViewModels.Interfaces;
 
 namespace MovieFinder.Mapping;
 

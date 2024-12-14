@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 
 namespace MovieFinder.ViewModels;

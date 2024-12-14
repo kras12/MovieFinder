@@ -1,4 +1,4 @@
-﻿namespace MovieFinder.ViewModels;
+﻿namespace MovieFinder.ViewModels.Interfaces;
 
 /// <summary>
 /// Interface for a viewModel class containing information about a movie category.
