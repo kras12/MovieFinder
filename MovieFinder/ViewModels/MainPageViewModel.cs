@@ -16,10 +16,9 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     #region Fields
 
     /// <summary>
-    /// Contains the data for filtering the movie listing.
+    /// Backing field for property <see cref="MovieSearchFilter"/>
     /// </summary>
-    [ObservableProperty]
-    public IMovieSearchFilterViewModel _movieSearchFilter;
+    private IMovieSearchFilterViewModel _movieSearchFilter;
 
     /// <summary>
     /// The injected mapper. 
@@ -37,11 +36,9 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     private readonly IMovieCategoryCacheService _movieCategoryCacheService;
 
     /// <summary>
-    /// Returns true if the movie filters view is open. 
+    /// Backing field for property <see cref="IsMovieFiltersOpen"/>
     /// </summary>
-    [ObservableProperty]
     private bool _isMovieFiltersOpen;
-
 
     /// <summary>
     /// Backing field for property <see cref="Data.Models.MovieSearchResult"/>.
@@ -63,7 +60,7 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         _movieApiService = movieApiService;
         _mapper = mapper;
         _movieCategoryCacheService = movieCategoryCacheService;
-        _movieSearchFilter = movieSearchFilterViewModel;
+        MovieSearchFilter = movieSearchFilterViewModel;
         MovieSearchResult = movieSearchResult;
 
         MovieSearchFilter.MovieCategories =
@@ -149,6 +146,24 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
             GetNextMovieSearchPageCommand.NotifyCanExecuteChanged();
             GetPreviousMovieSearchPageCommand.NotifyCanExecuteChanged();
         }
+    }
+
+    /// <summary>
+    /// Contains the data for filtering the movie listing.
+    /// </summary>
+    public IMovieSearchFilterViewModel MovieSearchFilter
+    {
+        get => _movieSearchFilter;
+        set => SetProperty(ref _movieSearchFilter, value);
+    }
+
+    /// <summary>
+    /// Returns true if the movie filters view is open. 
+    /// </summary>
+    public bool IsMovieFiltersOpen
+    {
+        get => _isMovieFiltersOpen; 
+        set => SetProperty(ref _isMovieFiltersOpen, value);
     }
 
     #endregion
