@@ -18,18 +18,18 @@
         <!-- Menu panel -->
         <VerticalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="20">
-                <Button Text="Filter" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120" BackgroundColor="#074799"/>
+                <Button Text="Filters" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120" BackgroundColor="#074799" ToolTipProperties.Text="More filters."/>
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,-5,0,0">
                     <ImageButton Source="navigation_arrow_double_left.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
-                                 Command="{Binding GetFirstMovieSearchPageCommand}"/>
+                                 Command="{Binding GetFirstMovieSearchPageCommand}" ToolTipProperties.Text="First page."/>
                     <ImageButton Source="navigation_arrow_left.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
-                                 Command="{Binding GetPreviousMovieSearchPageCommand}" Margin="-10,0,0,0"/>
+                                 Command="{Binding GetPreviousMovieSearchPageCommand}" ToolTipProperties.Text="Previous page." Margin="-10,0,0,0"/>
                     <Label VerticalOptions="Center" Text="{Binding MovieSearchResult.PaginationText}"/>
                 <ImageButton Source="navigation_arrow_right.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
-                             Command="{Binding GetNextMovieSearchPageCommand}"/>
+                             Command="{Binding GetNextMovieSearchPageCommand}" ToolTipProperties.Text="Next page."/>
                 <ImageButton Source="navigation_arrow_double_right.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
-                             Command="{Binding GetLastMovieSearchPageCommand}" Margin="-10,0,0,0"/>
+                             Command="{Binding GetLastMovieSearchPageCommand}" ToolTipProperties.Text="Last page." Margin="-10,0,0,0"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
         
