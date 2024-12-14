@@ -113,7 +113,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
         }
 
         init
-    {
+        {
             SetProperty(ref _backdropPath, value != null ? ConstructImagePath(value) : null);
         }
     }
@@ -185,10 +185,10 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     /// <summary>
     /// Path to a poster image for the movie.
     /// </summary>
-    public string PosterPath
+    public string? PosterPath
     {
         get => _posterPath;
-        init => SetProperty(ref _posterPath, ConstructImagePath(value));
+        init => SetProperty(ref _posterPath, value != null ? ConstructImagePath(value) : null);
     }
 
     /// <summary>

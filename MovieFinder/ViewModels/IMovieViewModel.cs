@@ -50,7 +50,7 @@ public interface IMovieViewModel
     /// <summary>
     /// Path to a poster image for the movie.
     /// </summary>
-    string PosterPath { get; init; }
+    string? PosterPath { get; init; }
 
     /// <summary>
     /// The release date for the movie.
