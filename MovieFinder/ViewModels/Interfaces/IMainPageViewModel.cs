@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace MovieFinder.ViewModels.Interfaces;
 
@@ -22,6 +21,11 @@ public interface IMainPageViewModel
     /// Requests the last page using the current search filters. 
     /// </summary>
     public IAsyncRelayCommand GetLastMovieSearchPageCommand { get; }
+
+    /// <summary>
+    /// Displays the details for a movie.
+    /// </summary>
+    public IAsyncRelayCommand<IMovieViewModel> GetMovieDetailsCommand { get; }
 
     /// <summary>
     /// Requests the next page using the current search filters. 

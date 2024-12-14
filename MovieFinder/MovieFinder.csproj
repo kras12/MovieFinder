@@ -81,6 +81,9 @@
 	  <Compile Update="MovieDiscoveryPage.xaml.cs">
 	    <DependentUpon>MovieDiscoveryPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Components\MovieListingView.xaml.cs">
+	    <DependentUpon>MovieListingView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -88,6 +91,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MovieDiscoveryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\MovieListingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
