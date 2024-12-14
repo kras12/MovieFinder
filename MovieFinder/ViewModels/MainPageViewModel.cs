@@ -16,11 +16,6 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     #region Fields
 
     /// <summary>
-    /// Backing field for property <see cref="MovieSearchFilter"/>
-    /// </summary>
-    private IMovieSearchFilterViewModel _movieSearchFilter;
-
-    /// <summary>
     /// The injected mapper. 
     /// </summary>
     private readonly IMapper _mapper;
@@ -39,6 +34,11 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// Backing field for property <see cref="IsMovieFiltersOpen"/>
     /// </summary>
     private bool _isMovieFiltersOpen;
+
+    /// <summary>
+    /// Backing field for property <see cref="MovieSearchFilter"/>
+    /// </summary>
+    private IMovieSearchFilterViewModel _movieSearchFilter;
 
     /// <summary>
     /// Backing field for property <see cref="Data.Models.MovieSearchResult"/>.
@@ -83,6 +83,35 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         await SearchMovies();
     }
 
+    /// <summary>
+    /// Requests the first page using the current search filters. 
+    /// </summary>
+    /// <returns><see cref="Task"/></returns>
+    [RelayCommand(CanExecute = nameof(CanNavigateBackwardInMovieSearchResult))]
+    private async Task GetFirstMovieSearchPage()
+    {
+        if (CanNavigateBackwardInMovieSearchResult())
+        {
+            MovieSearchFilter.Page = 1;
+            await SearchMovies();
+        }
+    }
+
+    /// <summary>
+    /// Requests the last page using the current search filters. 
+    /// </summary>
+    /// <returns><see cref="Task"/></returns>
+    [RelayCommand(CanExecute = nameof(CanNavigateForwardInMovieSearchResult))]
+    private async Task GetLastMovieSearchPage()
+    {
+        if (CanNavigateForwardInMovieSearchResult())
+        {
+            // TODO - Max
+            MovieSearchFilter.Page = Math.Min(MovieSearchResult.TotalPages, _movieApiService.MaxNumberForPageRequest);
+            await SearchMovies();
+        }
+    }
+
     [RelayCommand]
     private async Task GetMovieDetails(IMovieViewModel movie)
     {
@@ -96,12 +125,12 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// Requests the next page using the current search filters. 
     /// </summary>
     /// <returns><see cref="Task"/></returns>
-    [RelayCommand(CanExecute = nameof(CanGetNextMovieSearchPage))]
+    [RelayCommand(CanExecute = nameof(CanNavigateForwardInMovieSearchResult))]
     private async Task GetNextMovieSearchPage()
     {
-        if (MovieSearchResult.HaveNextPages)
+        if (CanNavigateForwardInMovieSearchResult())
         {
-            MovieSearchFilter.Page = MovieSearchResult.Page + 1;
+            MovieSearchFilter.Page = Math.Min(MovieSearchResult.Page + 1, _movieApiService.MaxNumberForPageRequest);
             await SearchMovies();
         }
     }
@@ -110,10 +139,10 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// Requests the previous page using the current search filters. 
     /// </summary>
     /// <returns><see cref="Task"/></returns>
-    [RelayCommand(CanExecute = nameof(CanGetPreviousMovieSearchPage))]
+    [RelayCommand(CanExecute = nameof(CanNavigateBackwardInMovieSearchResult))]
     private async Task GetPreviousMovieSearchPage()
     {
-        if (MovieSearchResult.HavePreviousPages)
+        if (CanNavigateBackwardInMovieSearchResult())
         {
             MovieSearchFilter.Page = MovieSearchResult.Page - 1;
             await SearchMovies();
@@ -134,18 +163,12 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     #region Properties
 
     /// <summary>
-    /// Contains the result from a movie search.
+    /// Returns true if the movie filters view is open. 
     /// </summary>
-    public IMovieSearchResultViewModel MovieSearchResult
+    public bool IsMovieFiltersOpen
     {
-        get => _movieSearchResult;
-
-        set
-        {
-            SetProperty(ref _movieSearchResult, value);
-            GetNextMovieSearchPageCommand.NotifyCanExecuteChanged();
-            GetPreviousMovieSearchPageCommand.NotifyCanExecuteChanged();
-        }
+        get => _isMovieFiltersOpen;
+        set => SetProperty(ref _isMovieFiltersOpen, value);
     }
 
     /// <summary>
@@ -158,34 +181,40 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     }
 
     /// <summary>
-    /// Returns true if the movie filters view is open. 
+    /// Contains the result from a movie search.
     /// </summary>
-    public bool IsMovieFiltersOpen
+    public IMovieSearchResultViewModel MovieSearchResult
     {
-        get => _isMovieFiltersOpen; 
-        set => SetProperty(ref _isMovieFiltersOpen, value);
-    }
+        get => _movieSearchResult;
 
+        set
+        {
+            SetProperty(ref _movieSearchResult, value);
+            GetNextMovieSearchPageCommand.NotifyCanExecuteChanged();
+            GetPreviousMovieSearchPageCommand.NotifyCanExecuteChanged();
+            GetFirstMovieSearchPageCommand.NotifyCanExecuteChanged();
+            GetLastMovieSearchPageCommand.NotifyCanExecuteChanged();
+        }
+    }
     #endregion
 
     #region Methods
 
     /// <summary>
-    /// Checks whether the <see cref="GetNextMovieSearchPageCommand"/> can be executed.
+    /// Returns true if it's possible to navigate backwards to another page using the current search parameters.
     /// </summary>
-    /// <returns>True if the command can be executed.</returns>
-    private bool CanGetNextMovieSearchPage()
+    public bool CanNavigateBackwardInMovieSearchResult()
     {
-        return MovieSearchResult.HaveNextPages;
+        return MovieSearchResult.TotalPages > 0 && MovieSearchFilter.Page > 1;
     }
 
     /// <summary>
-    /// Checks whether the <see cref="GetPreviousMovieSearchPageCommand"/> can be executed.
+    /// Returns true if it's possible to navigate forward to another page using the current search parameters.
     /// </summary>
-    /// <returns>True if the command can be executed.</returns>
-    private bool CanGetPreviousMovieSearchPage()
+    public bool CanNavigateForwardInMovieSearchResult()
     {
-        return MovieSearchResult.HavePreviousPages;
+        return MovieSearchResult.TotalPages > 0
+            && MovieSearchResult.Page < Math.Min(MovieSearchResult.TotalPages, _movieApiService.MaxNumberForPageRequest);
     }
 
     /// <summary>
@@ -205,6 +234,7 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
             else
             {
                 // TODO - Implement error handling
+                Debug.WriteLine($"Error when searching for movies: {response.ApiError?.ErrorMessage ?? ""}");
             }
         }
         catch (Exception ex)

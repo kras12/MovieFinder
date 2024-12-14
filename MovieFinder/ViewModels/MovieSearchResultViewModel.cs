@@ -32,17 +32,7 @@ public partial class MovieSearchResultViewModel : ObservableObject, IMovieSearch
 
     #endregion
 
-    #region properties
-
-    /// <summary>
-    /// Returns true if there exists next pages with the current search parameters.
-    /// </summary>
-    public bool HaveNextPages => Page < TotalPages;
-
-    /// <summary>
-    /// Returns true if there exists previous pages with the current search parameters.
-    /// </summary>
-    public bool HavePreviousPages => Page > 1;
+    #region properties   
 
     /// <summary>
     /// The page number for the search result.
@@ -54,8 +44,7 @@ public partial class MovieSearchResultViewModel : ObservableObject, IMovieSearch
         init
         {
             SetProperty(ref _page, value);
-            OnPropertyChanged(nameof(HavePreviousPages));
-            OnPropertyChanged(nameof(HaveNextPages));
+            OnPropertyChanged(nameof(PaginationText));
         }
     }
 

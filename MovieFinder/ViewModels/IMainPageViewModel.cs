@@ -14,6 +14,16 @@ public interface IMainPageViewModel
     public IAsyncRelayCommand ApplyMovieFiltersCommand { get; }
 
     /// <summary>
+    /// Requests the first page using the current search filters. 
+    /// </summary>
+    public IAsyncRelayCommand GetFirstMovieSearchPageCommand { get; }
+
+    /// <summary>
+    /// Requests the last page using the current search filters. 
+    /// </summary>
+    public IAsyncRelayCommand GetLastMovieSearchPageCommand { get; }
+
+    /// <summary>
     /// Requests the next page using the current search filters. 
     /// </summary>
     public IAsyncRelayCommand GetNextMovieSearchPageCommand { get; }

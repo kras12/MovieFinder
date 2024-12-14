@@ -8,16 +8,6 @@ namespace MovieFinder.ViewModels;
 public interface IMovieSearchResultViewModel
 {
     /// <summary>
-    /// Returns true if there exists next pages with the current search parameters.
-    /// </summary>
-    bool HaveNextPages { get; }
-
-    /// <summary>
-    /// Returns true if there exists previous pages with the current search parameters.
-    /// </summary>
-    bool HavePreviousPages { get; }
-
-    /// <summary>
     /// The page number for the search result.
     /// </summary>
     int Page { get; init; }
