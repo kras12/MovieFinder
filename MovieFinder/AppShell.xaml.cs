@@ -1,14 +1,13 @@
 ﻿using MovieFinder.Pages;
 
-namespace MovieFinder
+namespace MovieFinder;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-            Routing.RegisterRoute(nameof(MovieDetailsPage), typeof(MovieDetailsPage));
-            Routing.RegisterRoute(nameof(MovieDiscoveryPage), typeof(MovieDiscoveryPage));
-        }
+        InitializeComponent();
+        Routing.RegisterRoute(nameof(MovieDetailsPage), typeof(MovieDetailsPage));
+        Routing.RegisterRoute(nameof(MovieDiscoveryPage), typeof(MovieDiscoveryPage));
     }
 }
