@@ -89,6 +89,7 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     private async Task ApplyMovieFilters()
     {
         IsMovieFiltersOpen = false;
+        MovieSearchFilter.Page = 1;
         await SearchMovies();
     }
 
