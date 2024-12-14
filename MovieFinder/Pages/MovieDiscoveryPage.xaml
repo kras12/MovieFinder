@@ -6,7 +6,7 @@
              xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
              xmlns:components="clr-namespace:MovieFinder.Components"
              x:Class="MovieFinder.Pages.MovieDiscoveryPage"
-             x:DataType="viewmodels:IMainPageViewModel"
+             x:DataType="viewmodels:IMovieDiscoveryViewModel"
              Title="Movie Finder">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
