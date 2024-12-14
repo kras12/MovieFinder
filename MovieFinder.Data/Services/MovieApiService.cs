@@ -221,7 +221,7 @@ public class MovieApiService : IMovieApiService
             }
             else
             {
-                result.ApiError = await response.Content.ReadFromJsonAsync<ApiError>() ?? CreateDeSerializationApiError();
+                result.ApiError = _mapper.Map<ApiError>(await response.Content.ReadFromJsonAsync<ApiErrorDto>()) ?? CreateDeSerializationApiError();
             }
         }
         catch (Exception ex)

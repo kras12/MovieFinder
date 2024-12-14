@@ -11,8 +11,7 @@ public class ApiError
     /// Constructor.
     /// </summary>
     /// <param name="errorCode">The error code.</param>
-    /// <param name="errorMessage">The error message.</param>
-    
+    /// <param name="errorMessage">The error message.</param>    
     public ApiError(int errorCode, string errorMessage)
     {
         ErrorCode = errorCode;

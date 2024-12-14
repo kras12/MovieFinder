@@ -20,6 +20,7 @@ public class DataLayerAutoMapperProfile : Profile
             .ForMember(dest => dest.Categories, opt => opt.ConvertUsing<IDataLayerMovieCategoryIdToMovieCategoryConverter, List<int>>(src => src.CategoryIds));
 
         CreateMap<MovieSearchResultDto, MovieSearchResult>();
+        CreateMap<ApiErrorDto, ApiError>();
     }
 
     #endregion
