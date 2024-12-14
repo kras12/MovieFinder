@@ -1,6 +1,6 @@
 using MovieFinder.ViewModels.Interfaces;
 
-namespace MovieFinder;
+namespace MovieFinder.Components;
 
 /// <summary>
 /// A component that lists movies. 

@@ -4,6 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:MovieFinder"
              xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
+             xmlns:components="clr-namespace:MovieFinder.Components"
              x:Class="MovieFinder.Pages.MovieDiscoveryPage"
              x:DataType="viewmodels:IMainPageViewModel"
              Title="Movie Finder">
@@ -37,7 +38,7 @@
         </VerticalStackLayout>
 
         <!-- Movie listing -->
-        <local:MovieListingView Grid.Row="1" ViewModel="{Binding}"/>        
+        <components:MovieListingView Grid.Row="1" ViewModel="{Binding}"/>
 
         <ContentView IsVisible="{Binding IsMovieFiltersOpen}">
             <Border Padding="10" BackgroundColor="LightBlue">
