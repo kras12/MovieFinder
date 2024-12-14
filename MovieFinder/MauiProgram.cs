@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MovieFinder.Data.Configuration;
 using MovieFinder.Data.Extensions;
 using MovieFinder.Data.Services;
+using MovieFinder.Database.Context;
 using MovieFinder.Mapping;
+using MovieFinder.Shared.Helpers;
 using MovieFinder.ViewModels;
 using MovieFinder.ViewModels.Interfaces;
 
@@ -37,6 +40,11 @@ namespace MovieFinder
             builder.Services.AddTransient<IMovieDetailsPageViewModel, MovieDetailsPageViewModel>();
             builder.Services.AddTransient<IMovieSearchFilterViewModel, MovieSearchFilterViewModel>();
             builder.Services.AddTransient<IMovieSearchResultViewModel, MovieSearchResultViewModel>();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlite(DatabaseSettingsHelper.DevDbConnectionString);
+            });
 
             builder.Services.AddDataLayerServices();
 

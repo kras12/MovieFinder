@@ -1,15 +1,23 @@
-﻿namespace MovieFinder
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+﻿using Microsoft.EntityFrameworkCore;
+using MovieFinder.Database.Context;
 
-        protected override Window CreateWindow(IActivationState? activationState)
+namespace MovieFinder;
+
+public partial class App : Application
+{
+    public App(IServiceProvider serviceProvider)
+    {
+        InitializeComponent();
+
+        using (var scope = serviceProvider.CreateScope())
         {
-            return new Window(new AppShell());
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            dbContext.Database.Migrate();
         }
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
     }
 }

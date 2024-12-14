@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder", "MovieFinder\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder.Data", "MovieFinder.Data\MovieFinder.Data.csproj", "{A4B255F3-9734-48E7-A4B9-5F16AA2FC1AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder.Database", "MovieFinder.Database\MovieFinder.Database.csproj", "{CF07D861-47E5-43C9-AF82-EABCBC54EF15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder.Migration", "MovieFinder.Migration\MovieFinder.Migration.csproj", "{8BE5CFF0-933A-43DF-B1C7-E55687B75A66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieFinder.Shared", "MovieFinder.Shared\MovieFinder.Shared.csproj", "{AF7707AC-4AAF-489B-A7F8-98D1B9A34AD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +28,18 @@ Global
 		{A4B255F3-9734-48E7-A4B9-5F16AA2FC1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B255F3-9734-48E7-A4B9-5F16AA2FC1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4B255F3-9734-48E7-A4B9-5F16AA2FC1AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF07D861-47E5-43C9-AF82-EABCBC54EF15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF07D861-47E5-43C9-AF82-EABCBC54EF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF07D861-47E5-43C9-AF82-EABCBC54EF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF07D861-47E5-43C9-AF82-EABCBC54EF15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE5CFF0-933A-43DF-B1C7-E55687B75A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE5CFF0-933A-43DF-B1C7-E55687B75A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE5CFF0-933A-43DF-B1C7-E55687B75A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE5CFF0-933A-43DF-B1C7-E55687B75A66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7707AC-4AAF-489B-A7F8-98D1B9A34AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7707AC-4AAF-489B-A7F8-98D1B9A34AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7707AC-4AAF-489B-A7F8-98D1B9A34AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF7707AC-4AAF-489B-A7F8-98D1B9A34AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
