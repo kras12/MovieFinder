@@ -104,9 +104,9 @@
         <ContentView IsVisible="{Binding IsMovieFiltersOpen}">
             <Border Padding="10" BackgroundColor="LightBlue">
                 <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
-                    <Picker Title="Filter by XXX" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" 
+                    <Picker Title="Filter by category" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" 
                             ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
-                    <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
+                    <Button Text="Apply" BackgroundColor="#074799" Command="{Binding ApplyMovieFiltersCommand}"/>
                 </VerticalStackLayout>                
             </Border>
         </ContentView>
