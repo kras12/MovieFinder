@@ -18,7 +18,8 @@
         <!-- Menu panel -->
         <VerticalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="20">
-                <Button Text="Filters" Command="{Binding OpenMovieFiltersCommand}" HorizontalOptions="Center" MinimumWidthRequest="120" BackgroundColor="#074799" ToolTipProperties.Text="More filters."/>
+                <ImageButton Source="filter.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
+                    Command="{Binding OpenMovieFiltersCommand}" ToolTipProperties.Text="More filters."/>
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,-5,0,0">
                     <ImageButton Source="navigation_arrow_double_left.png" HeightRequest="44" WidthRequest="44" Padding="10" HorizontalOptions="Center" VerticalOptions="Center" 
