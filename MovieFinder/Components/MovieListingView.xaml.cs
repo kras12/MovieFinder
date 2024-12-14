@@ -10,10 +10,10 @@ public partial class MovieListingView : ContentView
     #region Fields
 
     /// <summary>
-    /// Bindable property to faciliate binding of a <see cref="IMainPageViewModel"/> object to a <see cref="MovieListingView"/> class instance. 
+    /// Bindable property to faciliate binding of a <see cref="IMovieDiscoveryViewModel"/> object to a <see cref="MovieListingView"/> class instance. 
     /// </summary>
 	public static readonly BindableProperty ViewModelProperty =
-		BindableProperty.Create(nameof(ViewModel), typeof(IMainPageViewModel), typeof(MovieListingView), default(IMainPageViewModel), propertyChanged: OnViewModelChanged);
+		BindableProperty.Create(nameof(ViewModel), typeof(IMovieDiscoveryViewModel), typeof(MovieListingView), default(IMovieDiscoveryViewModel), propertyChanged: OnViewModelChanged);
 
     #endregion
 
@@ -34,9 +34,9 @@ public partial class MovieListingView : ContentView
     /// <summary>
     /// The view model to use. 
     /// </summary>
-    public IMainPageViewModel ViewModel
+    public IMovieDiscoveryViewModel ViewModel
     {
-        get => (IMainPageViewModel)GetValue(ViewModelProperty);
+        get => (IMovieDiscoveryViewModel)GetValue(ViewModelProperty);
         set => SetValue(ViewModelProperty, value);
     }
 
@@ -45,14 +45,14 @@ public partial class MovieListingView : ContentView
     #region Methods
 
     /// <summary>
-    /// Event handler that sets the new <see cref="IMainPageViewModel"/> as the binding context for a <see cref="MovieListingView"/>.
+    /// Event handler that sets the new <see cref="IMovieDiscoveryViewModel"/> as the binding context for a <see cref="MovieListingView"/>.
     /// </summary>
     /// <param name="bindable">The class instance that received a new binding value.</param>
     /// <param name="oldValue">The old viewmodel binding value.</param>
     /// <param name="newValue">The new viewmodel binding value.</param>
     private static void OnViewModelChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is MovieListingView view && newValue is IMainPageViewModel viewModel)
+        if (bindable is MovieListingView view && newValue is IMovieDiscoveryViewModel viewModel)
         {
             view.BindingContext = viewModel;
         }

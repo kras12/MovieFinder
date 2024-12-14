@@ -29,7 +29,7 @@ namespace MovieFinder
 
             builder.Services.AddAutoMapper(config => config.AddProfile<AutoMapperProfile>());
             builder.Services.AddSingleton<IMovieApiService, MovieApiService>();
-            builder.Services.AddSingleton<IMainPageViewModel, MainPageViewModel>();
+            builder.Services.AddSingleton<IMovieDiscoveryViewModel, MovieDiscoveryViewModel>();
             builder.Services.AddSingleton<HttpClient, HttpClient>();
             builder.Services.AddSingleton<IMovieCategoryCacheService, MovieCategoryCacheService>();
             builder.Services.AddTransient<IMovieViewModel, MovieViewModel>();

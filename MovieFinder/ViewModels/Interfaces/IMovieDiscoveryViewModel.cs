@@ -5,7 +5,7 @@ namespace MovieFinder.ViewModels.Interfaces;
 /// <summary>
 /// Interface for a view model class for the main page. 
 /// </summary>
-public interface IMainPageViewModel
+public interface IMovieDiscoveryViewModel
 {
     /// <summary>
     /// Closes the movie filters view and refreshes the movie collection. 

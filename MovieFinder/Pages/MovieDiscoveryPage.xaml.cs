@@ -4,9 +4,9 @@ namespace MovieFinder.Pages;
 
 public partial class MovieDiscoveryPage : ContentPage
 {
-    private readonly IMainPageViewModel _viewModel;
+    private readonly IMovieDiscoveryViewModel _viewModel;
 
-    public MovieDiscoveryPage(IMainPageViewModel viewModel)
+    public MovieDiscoveryPage(IMovieDiscoveryViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;

@@ -11,9 +11,9 @@ using System.Diagnostics;
 namespace MovieFinder.ViewModels;
 
 /// <summary>
-/// View model class for the main page. 
+/// View model class for the movie discovery page
 /// </summary>
-public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
+public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscoveryViewModel
 {
     #region Fields
 
@@ -62,7 +62,7 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     /// <param name="movieApiService">The injected movie API service.</param>
     /// <param name="mapper">The injected mapper.</param>
     /// <param name="movieCategoryCacheService">The injected movie category cache service.</param>
-    public MainPageViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService, IMovieSearchFilterViewModel movieSearchFilterViewModel, IMovieSearchResultViewModel movieSearchResult)
+    public MovieDiscoveryViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService, IMovieSearchFilterViewModel movieSearchFilterViewModel, IMovieSearchResultViewModel movieSearchResult)
     {
         _movieApiService = movieApiService;
         _mapper = mapper;
