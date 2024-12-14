@@ -9,7 +9,7 @@
 
     <ScrollView Padding="10">
         <VerticalStackLayout Spacing="10">
-            <Button Text="Back" Command="{Binding NavigateBackCommand}" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#074799"/>
+            <Button Text="Back" Command="{Binding NavigateBackCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
             <Border Padding="10">
                 <Border.Behaviors>
                     <toolkit:TouchBehavior DefaultAnimationDuration="250" DefaultAnimationEasing="{x:Static Easing.CubicInOut}" PressedOpacity="0.6" PressedScale="0.8"
