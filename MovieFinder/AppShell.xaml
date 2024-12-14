@@ -4,13 +4,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MovieFinder"
+    xmlns:pages="clr-namespace:MovieFinder.Pages"
     Shell.FlyoutBehavior="Flyout"
     Title="MovieFinder">
 
     <FlyoutItem Title="Movie Discovery">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:MovieDiscoveryPage}"/>
-            <ShellContent ContentTemplate="{DataTemplate local:MovieDiscoverPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:MovieDiscoveryPage}"/>
         </Tab>
     </FlyoutItem>    
 </Shell>

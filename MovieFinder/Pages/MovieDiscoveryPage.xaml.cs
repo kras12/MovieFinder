@@ -1,6 +1,6 @@
 using MovieFinder.ViewModels.Interfaces;
 
-namespace MovieFinder;
+namespace MovieFinder.Pages;
 
 public partial class MovieDiscoveryPage : ContentPage
 {

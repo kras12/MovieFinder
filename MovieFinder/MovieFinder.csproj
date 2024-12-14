@@ -75,10 +75,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MovieDetailsPage.xaml.cs">
+	  <Compile Update="Pages\MovieDetailsPage.xaml.cs">
 	    <DependentUpon>MovieDetailsPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="MovieDiscoveryPage.xaml.cs">
+	  <Compile Update="Pages\MovieDiscoveryPage.xaml.cs">
 	    <DependentUpon>MovieDiscoveryPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Components\MovieListingView.xaml.cs">
@@ -87,10 +87,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MovieDetailsPage.xaml">
+	  <MauiXaml Update="Pages\MovieDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MovieDiscoveryPage.xaml">
+	  <MauiXaml Update="Pages\MovieDiscoveryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\MovieListingView.xaml">

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Data.Models;
 using MovieFinder.Data.Services;
+using MovieFinder.Pages;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

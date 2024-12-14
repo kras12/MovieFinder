@@ -1,4 +1,6 @@
-﻿namespace MovieFinder
+﻿using MovieFinder.Pages;
+
+namespace MovieFinder
 {
     public partial class AppShell : Shell
     {
