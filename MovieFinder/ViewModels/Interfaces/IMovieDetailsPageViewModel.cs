@@ -8,9 +8,9 @@ namespace MovieFinder.ViewModels.Interfaces;
 public interface IMovieDetailsPageViewModel
 {
     /// <summary>
-    /// The command to go back to the home page. 
+    /// Navigates back to the previous page.
     /// </summary>
-    IAsyncRelayCommand GoToHomePageCommand { get; }
+    IAsyncRelayCommand NavigateBackCommand { get; }
 
     /// <summary>
     /// The movie to show details for. 

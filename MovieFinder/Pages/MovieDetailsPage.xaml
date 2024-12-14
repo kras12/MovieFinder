@@ -9,7 +9,7 @@
 
     <ScrollView Padding="10">
         <VerticalStackLayout>
-            <Button Text="Home" Command="{Binding GoToHomePageCommand}"/>
+            <Button Text="Back" Command="{Binding NavigateBackCommand}"/>
             <Border Padding="10">
                 <Border.Behaviors>
                     <toolkit:TouchBehavior DefaultAnimationDuration="250" DefaultAnimationEasing="{x:Static Easing.CubicInOut}" PressedOpacity="0.6" PressedScale="0.8"

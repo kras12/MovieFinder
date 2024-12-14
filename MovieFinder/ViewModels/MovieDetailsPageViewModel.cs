@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MovieFinder.Pages;
 using MovieFinder.ViewModels.Interfaces;
+using System.Diagnostics;
 
 namespace MovieFinder.ViewModels;
 
@@ -22,12 +22,19 @@ public partial class MovieDetailsPageViewModel : ObservableObject, IMovieDetails
     #region Commands
 
     /// <summary>
-    /// The command to go back to the home page. 
+    /// Navigates back to the previous page.
     /// </summary>
     [RelayCommand]
-    private async Task GoToHomePage()
+    private async Task NavigateBack()
     {
-        await Shell.Current.GoToAsync($"///{nameof(MovieDiscoveryPage)}", animate: true, new Dictionary<string, object>());
+        try
+        {
+            await Shell.Current.Navigation.PopAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Navigation failed: {ex.Message}");
+        }
     }   
 
     #endregion
