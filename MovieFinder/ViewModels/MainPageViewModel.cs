@@ -16,6 +16,11 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
     #region Fields
 
     /// <summary>
+    /// The category filter option for selecting all categories.
+    /// </summary>
+    private readonly IMovieCategoryViewModel _allCategory;
+
+    /// <summary>
     /// The injected mapper. 
     /// </summary>
     private readonly IMapper _mapper;
@@ -66,7 +71,11 @@ public partial class MainPageViewModel : ObservableObject, IMainPageViewModel
         MovieSearchFilter.MovieCategories =
            new ObservableCollection<IMovieCategoryViewModel>(_mapper.Map<List<IMovieCategoryViewModel>>(_movieCategoryCacheService.GetAllCategories()));
 
-        SearchMovies();        
+        _allCategory = _mapper.Map<IMovieCategoryViewModel>(new MovieCategory() { Id = 0, Name = "All" });
+        MovieSearchFilter.MovieCategories.Insert(0, _allCategory);
+        MovieSearchFilter.WithCategory = _allCategory;
+
+        SearchMovies();
     }
 
     #endregion
