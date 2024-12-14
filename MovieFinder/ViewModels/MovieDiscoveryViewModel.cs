@@ -13,7 +13,7 @@ namespace MovieFinder.ViewModels;
 /// <summary>
 /// View model class for the movie discovery page
 /// </summary>
-public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscoveryViewModel
+public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscoveryViewModel, IMovieListingViewModel
 {
     #region Fields
 
@@ -184,6 +184,11 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     }
 
     /// <summary>
+    /// Contains a collection of found movies. 
+    /// </summary>
+    public ObservableCollection<IMovieViewModel> Movies => MovieSearchResult.Results;
+
+    /// <summary>
     /// Contains the data for filtering the movie listing.
     /// </summary>
     public IMovieSearchFilterViewModel MovieSearchFilter
@@ -206,8 +211,10 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
             GetPreviousMovieSearchPageCommand.NotifyCanExecuteChanged();
             GetFirstMovieSearchPageCommand.NotifyCanExecuteChanged();
             GetLastMovieSearchPageCommand.NotifyCanExecuteChanged();
+            OnPropertyChanged(nameof(Movies));
         }
     }
+
     #endregion
 
     #region Methods
