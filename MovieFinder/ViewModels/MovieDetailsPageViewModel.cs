@@ -26,7 +26,7 @@ public partial class MovieDetailsPageViewModel : ObservableObject, IMovieDetails
     [RelayCommand]
     private async Task GoToHomePage()
     {
-        await Shell.Current.GoToAsync($"///{nameof(MainPage)}", animate: true, new Dictionary<string, object>());
+        await Shell.Current.GoToAsync($"///{nameof(MovieDiscoveryPage)}", animate: true, new Dictionary<string, object>());
     }   
 
     #endregion

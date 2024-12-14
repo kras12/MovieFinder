@@ -7,9 +7,10 @@
     Shell.FlyoutBehavior="Flyout"
     Title="MovieFinder">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <FlyoutItem Title="Movie Discovery">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MovieDiscoveryPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:MovieDiscoverPage}"/>
+        </Tab>
+    </FlyoutItem>    
 </Shell>

@@ -78,10 +78,16 @@
 	  <Compile Update="MovieDetailsPage.xaml.cs">
 	    <DependentUpon>MovieDetailsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="MovieDiscoveryPage.xaml.cs">
+	    <DependentUpon>MovieDiscoveryPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="MovieDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MovieDiscoveryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
