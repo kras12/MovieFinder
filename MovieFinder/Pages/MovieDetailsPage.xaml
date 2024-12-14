@@ -12,8 +12,13 @@
             <Button Text="Back" Command="{Binding NavigateBackCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
             <Border Padding="10">
                 <Border.Behaviors>
-                    <toolkit:TouchBehavior DefaultAnimationDuration="250" DefaultAnimationEasing="{x:Static Easing.CubicInOut}" PressedOpacity="0.6" PressedScale="0.8"
-                               HoveredBackgroundColor="#B0C4DE" PressedBackgroundColor="#4169E1"/>
+                    <toolkit:TouchBehavior 
+                        DefaultAnimationDuration="{StaticResource TouchBehaviorAnimationDuration}" 
+                        DefaultAnimationEasing="{StaticResource TouchBehaviorAnimationEasing}" 
+                        PressedOpacity="{StaticResource TouchBehaviorPressedOpacity}" 
+                        PressedScale="{StaticResource TouchBehaviorPressedScale}" 
+                        HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}" 
+                        PressedBackgroundColor="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
                 </Border.Behaviors>
 
                 <VerticalStackLayout Spacing="10">

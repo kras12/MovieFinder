@@ -96,6 +96,9 @@
 	  <MauiXaml Update="Components\MovieListingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Behaviors\TouchBehavior.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
   
 </Project>

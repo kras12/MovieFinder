@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <!-- Colors -->
+    <Color x:Key="TouchBehaviorHoveredBackgroundColor">#B0C4DE</Color>
+    <Color x:Key="TouchBehaviorPressedBackgroundColor">#4169E1</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="TouchBehaviorHoveredBackgroundColorBrush" Color="{StaticResource TouchBehaviorHoveredBackgroundColor}"/>
+    <SolidColorBrush x:Key="TouchBehaviorPressedBackgroundColorBrush" Color="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
+
+    <!-- Animation Durations -->
+    <x:Int32 x:Key="TouchBehaviorAnimationDuration">250</x:Int32>
+
+    <!-- Easing Functions -->
+    <x:Static x:Key="TouchBehaviorAnimationEasing" Member="Easing.CubicInOut"/>
+
+    <!-- Opacity Values -->
+    <x:Double x:Key="TouchBehaviorPressedOpacity">0.6</x:Double>
+
+    <!-- Scale Values -->
+    <x:Double x:Key="TouchBehaviorPressedScale">0.8</x:Double>
+</ResourceDictionary>
