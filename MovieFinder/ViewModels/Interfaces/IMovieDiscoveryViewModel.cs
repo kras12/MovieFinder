@@ -56,4 +56,9 @@ public interface IMovieDiscoveryViewModel
     /// Opens the movie filters view.
     /// </summary>
     public IRelayCommand OpenMovieFiltersCommand { get; }
+
+    /// <summary>
+    /// Refreshes data in the view model.
+    /// </summary>
+    public void RefreshData();
 }

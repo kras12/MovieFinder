@@ -286,6 +286,14 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     }
 
     /// <summary>
+    /// Refreshes data in the view model.
+    /// </summary>
+    public void RefreshData()
+    {
+        SynchronizeWatchedMoviesWithSearchresult();
+    }
+
+    /// <summary>
     /// Returns true if it's possible to create a watched movie post.
     /// </summary>
     /// <param name="movie">The target movie.</param>
@@ -318,6 +326,8 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
             if (response.IsSuccess && response.Data != null)
             {
                 MovieSearchResult = _mapper.Map<IMovieSearchResultViewModel>(response.Data);
+                await SynchronizeWatchedMoviesWithSearchresult();
+                
             }
             else
             {
@@ -329,6 +339,26 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         {
             Debug.WriteLine($"Error when searching for movies: {ex.Message}");
         }
+    }
+
+    /// <summary>
+    /// Fetches watched movies from the database and synchronizes 
+    /// </summary>
+    /// <returns></returns>
+    private async Task SynchronizeWatchedMoviesWithSearchresult()
+    {
+        MovieSearchResult.Results.ToList()
+            .ForEach(x => x.IsWatched = false);
+
+        var watchedMovies = await _watchedMoviesRepository.GetAllAsync();
+
+        MovieSearchResult.Results
+            .Where(x => watchedMovies.Select(x => x.ApiMovieId).Contains(x.Id))
+            .ToList()
+            .ForEach(x => x.IsWatched = true);
+
+        CreateWatchedMovieCommand.NotifyCanExecuteChanged();
+        DeleteWatchedMovieCommand.NotifyCanExecuteChanged();
     }
 
     #endregion
