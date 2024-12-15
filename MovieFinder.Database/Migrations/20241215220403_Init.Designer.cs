@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieFinder.Database.Context;
 
-
 #nullable disable
 
 namespace MovieFinder.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241214214041_init")]
-    partial class init
+    [Migration("20241215220403_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,10 +19,13 @@ namespace MovieFinder.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("MovieFinder.Data.Models.Entities.WatchedMovieEntity", b =>
+            modelBuilder.Entity("MovieFinder.Database.Entities.WatchedMovieEntity", b =>
                 {
-                    b.Property<int>("MovieId")
+                    b.Property<int>("WatchedMovieId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ApiMovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -33,7 +35,10 @@ namespace MovieFinder.Database.Migrations
                     b.Property<int>("Vote")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MovieId");
+                    b.HasKey("WatchedMovieId");
+
+                    b.HasIndex("ApiMovieId")
+                        .IsUnique();
 
                     b.ToTable("WatchedMovies");
                 });

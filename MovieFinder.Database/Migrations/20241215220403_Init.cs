@@ -5,7 +5,7 @@
 namespace MovieFinder.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,15 +14,22 @@ namespace MovieFinder.Database.Migrations
                 name: "WatchedMovies",
                 columns: table => new
                 {
-                    MovieId = table.Column<int>(type: "INTEGER", nullable: false)
+                    WatchedMovieId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    ApiMovieId = table.Column<int>(type: "INTEGER", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Vote = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WatchedMovies", x => x.MovieId);
+                    table.PrimaryKey("PK_WatchedMovies", x => x.WatchedMovieId);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WatchedMovies_ApiMovieId",
+                table: "WatchedMovies",
+                column: "ApiMovieId",
+                unique: true);
         }
 
         /// <inheritdoc />

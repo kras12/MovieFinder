@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieFinder.Database.Context;
 
-
 #nullable disable
 
 namespace MovieFinder.Database.Migrations
@@ -17,10 +16,13 @@ namespace MovieFinder.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("MovieFinder.Data.Models.Entities.WatchedMovieEntity", b =>
+            modelBuilder.Entity("MovieFinder.Database.Entities.WatchedMovieEntity", b =>
                 {
-                    b.Property<int>("MovieId")
+                    b.Property<int>("WatchedMovieId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ApiMovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -30,9 +32,12 @@ namespace MovieFinder.Database.Migrations
                     b.Property<int>("Vote")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MovieId");
+                    b.HasKey("WatchedMovieId");
 
-                    b.ToTable("WatchedMovies", (string)null);
+                    b.HasIndex("ApiMovieId")
+                        .IsUnique();
+
+                    b.ToTable("WatchedMovies");
                 });
 #pragma warning restore 612, 618
         }

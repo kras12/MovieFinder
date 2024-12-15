@@ -11,9 +11,9 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
     #region Fields
     
     /// <summary>
-    /// Backing field for property <see cref="MovieId"/>.
+    /// Backing field for property <see cref="ApiMovieId"/>.
     /// </summary>
-    private int _movieId;
+    private int _apiMovieId;
 
     /// <summary>
     /// Backing field for property <see cref="Title"/>.
@@ -23,19 +23,24 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
     /// <summary>
     /// Backing field for property <see cref="Vote"/>.
     /// </summary>
-    private int _vote;    
-    
+    private int _vote;
+
+    /// <summary>
+    /// Backing field for property <see cref="WatchedMovieId"/>.
+    /// </summary>
+    private int _watchedMovieId;
+
     #endregion
 
     #region properties
 
     /// <summary>
-    /// The ID of the movie. 
+    /// The ID of the API movie. 
     /// </summary>
-    public int MovieId 
+    public int ApiMovieId 
     {
-        get => _movieId; 
-        set => SetProperty(ref _movieId, value);
+        get => _apiMovieId; 
+        set => SetProperty(ref _apiMovieId, value);
     }
 
     /// <summary>
@@ -67,6 +72,15 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
             SetProperty(ref _vote, value);
             OnPropertyChanged(nameof(UserVoteText));
         }
+    }
+
+    /// <summary>
+    /// The ID of the watched movie. 
+    /// </summary>
+    public int WatchedMovieId
+    {
+        get => _watchedMovieId;
+        set => SetProperty(ref _watchedMovieId, value);
     }
 
     #endregion

@@ -61,11 +61,11 @@ public class WatchedMoviesRepository : IWatchedMoviesRepository
     /// <summary>
     /// Deletes a movie from the database.
     /// </summary>
-    /// <param name="movieId">The ID of the movie to delete.</param>
+    /// <param name="watchedMovieId">The ID of the watched movie to delete.</param>
     /// <returns><see cref="Task"/></returns>
-    public Task DeleteMovieAsync(int movieId)
+    public Task DeleteMovieAsync(int watchedMovieId)
     {
-        return DeleteMovieAsync(new WatchedMovieEntity() { MovieId = movieId });
+        return DeleteMovieAsync(new WatchedMovieEntity() { WatchedMovieId = watchedMovieId });
     }
 
     /// <summary>
@@ -78,13 +78,23 @@ public class WatchedMoviesRepository : IWatchedMoviesRepository
     }
 
     /// <summary>
-    /// Attempts to fetch a movie by ID.
+    /// Attempts to fetch a movie by the watched movie ID.
     /// </summary>
-    /// <param name="id">The ID of the movie.</param>
+    /// <param name="watchedMovieId">The ID of the watched movie.</param>
     /// <returns>The found <see cref="WatchedMovieEntity"/> if the operation was successful.</returns>
-    public async Task<WatchedMovieEntity?> GetAsync(int id)
+    public async Task<WatchedMovieEntity?> GetAsync(int watchedMovieId)
     {
-        return await _context.WatchedMovies.AsNoTracking().FirstOrDefaultAsync(x => x.MovieId == id);
+        return await _context.WatchedMovies.AsNoTracking().FirstOrDefaultAsync(x => x.WatchedMovieId == watchedMovieId);
+    }
+
+    /// <summary>
+    /// Attempts to fetch a movie by title.
+    /// </summary>
+    /// <param name="id">The title of the movie.</param>
+    /// <returns>The found <see cref="WatchedMovieEntity"/> if the operation was successful.</returns>
+    public async Task<WatchedMovieEntity?> GetAsync(string title)
+    {
+        return await _context.WatchedMovies.AsNoTracking().FirstOrDefaultAsync(x => x.Title == title);
     }
 
     /// <summary>
@@ -100,11 +110,11 @@ public class WatchedMoviesRepository : IWatchedMoviesRepository
     /// <summary>
     /// Checks whether a movie exists in the database.
     /// </summary>
-    /// <param name="title">The ID of the movie.</param>
+    /// <param name="watchedMovieId">The ID of the watched movie.</param>
     /// <returns>True if the movie exists.</returns>
-    public async Task<bool> MovieExists(int movieId)
+    public async Task<bool> MovieExists(int watchedMovieId)
     {
-        return await _context.WatchedMovies.AnyAsync(x => x.MovieId ==  movieId);
+        return await _context.WatchedMovies.AnyAsync(x => x.WatchedMovieId ==  watchedMovieId);
     }
 
     /// <summary>

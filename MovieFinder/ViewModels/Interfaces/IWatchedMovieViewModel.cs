@@ -3,9 +3,9 @@
 public interface IWatchedMovieViewModel
 {
     /// <summary>
-    /// The ID of the movie. 
+    /// The ID of the API movie. 
     /// </summary>
-    public int MovieId { get; set; }
+    public int ApiMovieId { get; set; }
 
     /// <summary>
     /// The title of the movie.
@@ -20,5 +20,10 @@ public interface IWatchedMovieViewModel
     /// <summary>
     /// The user's vote for this movie. 
     /// </summary>
-    public int Vote {  get; set; }
+    public int Vote { get; set; }
+
+    /// <summary>
+    /// The ID of the watched movie. 
+    /// </summary>
+    public int WatchedMovieId { get; set; }
 }

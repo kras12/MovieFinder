@@ -13,6 +13,10 @@ internal class WatchedMovieConfiguration : IEntityTypeConfiguration<WatchedMovie
     public void Configure(EntityTypeBuilder<WatchedMovieEntity> builder)
     {
         builder
-            .HasKey(x => x.MovieId);
+            .HasKey(x => x.WatchedMovieId);
+
+        builder
+            .HasIndex(x => x.ApiMovieId)
+            .IsUnique();
     }
 }

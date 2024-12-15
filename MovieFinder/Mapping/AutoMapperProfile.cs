@@ -48,11 +48,12 @@ public class AutoMapperProfile : Profile
 
         CreateMap<WatchedMovieEntity, IWatchedMovieViewModel>()
             .ConstructUsingServiceLocator()
-            .ForMember(dest => dest.MovieId, opt => opt.MapFrom(dest => dest.MovieId))
+            .ForMember(dest => dest.WatchedMovieId, opt => opt.MapFrom(dest => dest.WatchedMovieId))
+            .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(dest => dest.ApiMovieId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
             .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote))
             .ReverseMap()
-            .ForMember(dest => dest.MovieId, opt => opt.MapFrom(dest => dest.MovieId))
+            .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(dest => dest.ApiMovieId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
             .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote));
     }

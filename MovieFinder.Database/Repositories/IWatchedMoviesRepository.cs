@@ -24,9 +24,9 @@ public interface IWatchedMoviesRepository
     /// <summary>
     /// Deletes a movie from the database.
     /// </summary>
-    /// <param name="movieId">The ID of the movie to delete.</param>
+    /// <param name="watchedMovieId">The ID of the movie to delete.</param>
     /// <returns><see cref="Task"/></returns>
-    Task DeleteMovieAsync(int movieId);
+    Task DeleteMovieAsync(int watchedMovieId);
 
     /// <summary>
     /// Fetches all movies from the database.
@@ -37,9 +37,16 @@ public interface IWatchedMoviesRepository
     /// <summary>
     /// Attempts to fetch a movie by ID.
     /// </summary>
-    /// <param name="id">The ID of the movie.</param>
+    /// <param name="watchedMovieId">The ID of the watched movie.</param>
     /// <returns>The found <see cref="WatchedMovieEntity"/> if the operation was successful.</returns>
-    Task<WatchedMovieEntity?> GetAsync(int id);
+    Task<WatchedMovieEntity?> GetAsync(int watchedMovieId);
+
+    /// <summary>
+    /// Attempts to fetch a movie by title.
+    /// </summary>
+    /// <param name="id">The title of the movie.</param>
+    /// <returns>The found <see cref="WatchedMovieEntity"/> if the operation was successful.</returns>
+    Task<WatchedMovieEntity?> GetAsync(string title);
 
     /// <summary>
     /// Checks whether a movie exists in the database.
@@ -51,9 +58,9 @@ public interface IWatchedMoviesRepository
     /// <summary>
     /// Checks whether a movie exists in the database.
     /// </summary>
-    /// <param name="title">The ID of the movie.</param>
+    /// <param name="title">The ID of the watched movie.</param>
     /// <returns>True if the movie exists.</returns>
-    Task<bool> MovieExists(int movieId);
+    Task<bool> MovieExists(int watchedMovieId);
 
     /// <summary>
     /// Returns the number of movies in the database.

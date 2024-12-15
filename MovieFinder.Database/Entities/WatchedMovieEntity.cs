@@ -3,9 +3,9 @@
 public class WatchedMovieEntity
 {
     /// <summary>
-    /// The ID of the movie.
+    /// The ID of the API movie.
     /// </summary>
-    public int MovieId { get; init; }
+    public int ApiMovieId { get; init; }
 
     /// <summary>
     /// The title of the movie.
@@ -16,4 +16,9 @@ public class WatchedMovieEntity
     /// The vote given by the user. 
     /// </summary>
     public int Vote { get; init; }
+
+    /// <summary>
+    /// The ID of the watched movie.
+    /// </summary>
+    public int WatchedMovieId { get; init; }
 }

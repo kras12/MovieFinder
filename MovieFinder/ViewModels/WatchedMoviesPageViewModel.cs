@@ -63,9 +63,9 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
     {
         try
         {
-            if (await _watchedMoviesRepository.MovieExists(movie.MovieId))
+            if (await _watchedMoviesRepository.MovieExists(movie.WatchedMovieId))
             {
-                await _watchedMoviesRepository.DeleteMovieAsync(movie.MovieId);
+                await _watchedMoviesRepository.DeleteMovieAsync(movie.WatchedMovieId);
             }            
         }
         catch (Exception ex)
