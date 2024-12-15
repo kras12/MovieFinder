@@ -16,54 +16,62 @@
                     <DataTemplate x:DataType="viewmodels:IMovieViewModel">
                         <Border Padding="20" Margin="0" StrokeThickness="2">
                             <VerticalStackLayout Spacing="0">
+                                <!-- Add/Remove buttons -->
+                                <components:TouchyImageButton Source="heart_circle_plus.png" HeightRequest="44" WidthRequest="44" Padding="5" CornerRadius="100" 
+                                        IsVisible="{Binding IsWatched, Converter={StaticResource InvertedBoolConverter}}"
+                                        Command="{Binding CreateWatchedMovieCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
+                                <components:TouchyImageButton Source="heart_circle_minus.png" HeightRequest="44" WidthRequest="44" Padding="5" CornerRadius="100" IsVisible="{Binding IsWatched}"
+                                        Command="{Binding DeleteWatchedMovieCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
                                 <components:TouchyBorder Padding="10">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Path=GetMovieDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
-                            </Border.GestureRecognizers>
-                            <VerticalStackLayout Spacing="10">
-                                <Label Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
-                                <Image Source="{Binding PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
-                                <Border Margin="0,0,0,0">
-                                    <Grid>
-                                        <Grid.Resources>
-                                            <Style TargetType="Label">
-                                                <Setter Property="Padding" Value="5"/>
-                                            </Style>
-                                            <Style x:Key="DescriptionColumn" TargetType="Label">
-                                                <Setter Property="BackgroundColor" Value="LightGray"/>
-                                            </Style>
-                                        </Grid.Resources>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Categories: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Padding="5" Text="{Binding CategoriesString}"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Language: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Padding="5" Text="{Binding OriginalLanguage}"/>
-                                        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Release date: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding ReleaseDate}"/>
-                                        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DescriptionColumn}" BackgroundColor="LightGray" Text="Popularity: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Popularity}"/>
-                                        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Average vote: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding VoteAverage}"/>
-                                        <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Votes: " FontAttributes="Bold"/>
-                                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding VoteCount}"/>
-                                    </Grid>
-                                </Border>
-                                <VerticalStackLayout Margin="0,0,0,0">
-                                    <Label Grid.Row="4" Grid.Column="0" Text="Overview: " FontAttributes="Bold"/>
-                                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding Overview}"/>
-                                </VerticalStackLayout>
+
+                                    <!-- Movie -->
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=GetMovieDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="10">
+                                        <Label Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
+                                        <Image Source="{Binding PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
+                                        <Border Margin="0,0,0,0">
+                                            <Grid>
+                                                <Grid.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="Padding" Value="5"/>
+                                                    </Style>
+                                                    <Style x:Key="DescriptionColumn" TargetType="Label">
+                                                        <Setter Property="BackgroundColor" Value="LightGray"/>
+                                                    </Style>
+                                                </Grid.Resources>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Categories: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="0" Grid.Column="1" Padding="5" Text="{Binding CategoriesString}"/>
+                                                <Label Grid.Row="1" Grid.Column="0" Padding="5" Style="{StaticResource DescriptionColumn}" Text="Language: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="1" Grid.Column="1" Padding="5" Text="{Binding OriginalLanguage}"/>
+                                                <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Release date: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding ReleaseDate}"/>
+                                                <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource DescriptionColumn}" BackgroundColor="LightGray" Text="Popularity: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Popularity}"/>
+                                                <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Average vote: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="4" Grid.Column="1" Text="{Binding VoteAverage}"/>
+                                                <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DescriptionColumn}" Text="Votes: " FontAttributes="Bold"/>
+                                                <Label Grid.Row="5" Grid.Column="1" Text="{Binding VoteCount}"/>
+                                            </Grid>
+                                        </Border>
+                                        <VerticalStackLayout Margin="0,0,0,0">
+                                            <Label Grid.Row="4" Grid.Column="0" Text="Overview: " FontAttributes="Bold"/>
+                                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Overview}"/>
+                                        </VerticalStackLayout>
                                     </VerticalStackLayout>
                                 </components:TouchyBorder>
                             </VerticalStackLayout>

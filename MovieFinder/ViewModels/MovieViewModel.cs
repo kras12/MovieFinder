@@ -41,6 +41,11 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     private int _id;
 
     /// <summary>
+    /// Backing field for property <see cref="IsWatched"/>.
+    /// </summary>
+    private bool _iswWatched;
+
+    /// <summary>
     /// Backing field for property <see cref="OriginalLanguage"/>.
     /// </summary>
     private string _originalLanguage = "";
@@ -145,6 +150,15 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     {
         get => _id;
         init => SetProperty(ref _id, value);
+    }
+
+    /// <summary>
+    /// Returns true if the user have watched this movie. 
+    /// </summary>
+    public bool IsWatched
+    {
+        get => _iswWatched;
+        set => SetProperty(ref _iswWatched, value);
     }
 
     /// <summary>

@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Data.Models;
 using MovieFinder.Data.Services;
+using MovieFinder.Database.Entities;
+using MovieFinder.Database.Repositories;
 using MovieFinder.Pages;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
@@ -38,6 +40,11 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     private readonly IMovieCategoryCacheService _movieCategoryCacheService;
 
     /// <summary>
+    /// The injected watched movies repository.
+    /// </summary>
+    private readonly IWatchedMoviesRepository _watchedMoviesRepository;
+
+    /// <summary>
     /// Backing field for property <see cref="IsMovieFiltersOpen"/>
     /// </summary>
     private bool _isMovieFiltersOpen;
@@ -62,13 +69,18 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     /// <param name="movieApiService">The injected movie API service.</param>
     /// <param name="mapper">The injected mapper.</param>
     /// <param name="movieCategoryCacheService">The injected movie category cache service.</param>
-    public MovieDiscoveryViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService, IMovieSearchFilterViewModel movieSearchFilterViewModel, IMovieSearchResultViewModel movieSearchResult)
+    /// <param name="movieSearchFilterViewModel">Contains the data for filtering the movie listing.</param>
+    /// <param name="movieSearchResult">Contains the search result from a movie search.</param>
+    /// <param name="watchedMoviesRepository">The injected watched movies repository.</param>
+    public MovieDiscoveryViewModel(IMovieApiService movieApiService, IMapper mapper, IMovieCategoryCacheService movieCategoryCacheService,
+        IMovieSearchFilterViewModel movieSearchFilterViewModel, IMovieSearchResultViewModel movieSearchResult, IWatchedMoviesRepository watchedMoviesRepository)
     {
         _movieApiService = movieApiService;
         _mapper = mapper;
         _movieCategoryCacheService = movieCategoryCacheService;
         MovieSearchFilter = movieSearchFilterViewModel;
         MovieSearchResult = movieSearchResult;
+        _watchedMoviesRepository = watchedMoviesRepository;
 
         MovieSearchFilter.MovieCategories =
            new ObservableCollection<IMovieCategoryViewModel>(_mapper.Map<List<IMovieCategoryViewModel>>(_movieCategoryCacheService.GetAllCategories()));
@@ -77,7 +89,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         MovieSearchFilter.MovieCategories.Insert(0, _allCategory);
         MovieSearchFilter.WithCategory = _allCategory;
 
-        SearchMovies();
+        SearchMovies();        
     }
 
     #endregion
@@ -93,6 +105,43 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         IsMovieFiltersOpen = false;
         MovieSearchFilter.Page = 1;
         await SearchMovies();
+    }
+
+    /// <summary>
+    /// Marks the movie as watched and adds it to the database.
+    /// </summary>
+    /// <param name="movie"></param>
+    /// <returns></returns>
+    [RelayCommand(CanExecute = nameof(CanCreateWatchedMovie))]
+    private async Task CreateWatchedMovie(IMovieViewModel movie)
+    {
+        if (CanCreateWatchedMovie(movie))
+        {
+            var result = await _watchedMoviesRepository.CreateMovieAsync(_mapper.Map<WatchedMovieEntity>(movie));
+            movie.IsWatched = true;
+            DeleteWatchedMovieCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    /// <summary>
+    /// Unmarks the movie as watched and deletes it from the database.
+    /// </summary>
+    /// <param name="movie"></param>
+    /// <returns></returns>
+    [RelayCommand(CanExecute = nameof(CanDeleteWatchedMovie))]
+    private async Task DeleteWatchedMovie(IMovieViewModel movie)
+    {
+        if (CanDeleteWatchedMovie(movie))
+        {
+            var targetMovie = await _watchedMoviesRepository.GetAsync(movie.Title);
+
+            if (targetMovie != null)
+            {
+                await _watchedMoviesRepository.DeleteMovieAsync(targetMovie);
+                movie.IsWatched = false;
+                CreateWatchedMovieCommand.NotifyCanExecuteChanged();
+            }
+        }
     }
 
     /// <summary>
@@ -234,6 +283,26 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     {
         return MovieSearchResult.TotalPages > 0
             && MovieSearchResult.Page < Math.Min(MovieSearchResult.TotalPages, _movieApiService.MaxNumberForPageRequest);
+    }
+
+    /// <summary>
+    /// Returns true if it's possible to create a watched movie post.
+    /// </summary>
+    /// <param name="movie">The target movie.</param>
+    /// <returns>True if the command can be executed.</returns>
+    private bool CanCreateWatchedMovie(IMovieViewModel movie)
+    {
+        return !movie.IsWatched;
+    }
+
+    /// <summary>
+    /// Returns true if it's possible to delete a watched movie post.
+    /// </summary>
+    /// <param name="movie">The target movie.</param>
+    /// <returns>True if the command can be executed.</returns>
+    private bool CanDeleteWatchedMovie(IMovieViewModel movie)
+    {
+        return movie.IsWatched;
     }
 
     /// <summary>

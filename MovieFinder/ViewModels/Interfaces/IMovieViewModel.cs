@@ -28,6 +28,11 @@ public interface IMovieViewModel
     int Id { get; init; }
 
     /// <summary>
+    /// Returns true if the user have watched this movie. 
+    /// </summary>
+    public bool IsWatched { get; set; }
+
+    /// <summary>
     /// The original language of the movie.
     /// </summary>
     string OriginalLanguage { get; init; }
