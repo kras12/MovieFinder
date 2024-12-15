@@ -22,4 +22,9 @@ public interface IWatchedMoviesPageViewModel
     /// The title that is shown above the movie list.
     /// </summary>
     public string PageTitle { get; }
+
+    /// <summary>
+    /// Refreshes data in the viewmodel. 
+    /// </summary>
+    void RefreshData();
 }

@@ -122,5 +122,13 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
         }
     }
 
+    /// <summary>
+    /// Refreshes data in the viewmodel. 
+    /// </summary>
+    public void RefreshData()
+    {
+        LoadWatchedMovies();
+    }
+
     #endregion
 }
