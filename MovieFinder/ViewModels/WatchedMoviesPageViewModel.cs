@@ -66,6 +66,8 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
             if (await _watchedMoviesRepository.MovieExists(movie.WatchedMovieId))
             {
                 await _watchedMoviesRepository.DeleteMovieAsync(movie.WatchedMovieId);
+                Movies.Remove(movie);
+                OnPropertyChanged(nameof(PageTitle));
             }            
         }
         catch (Exception ex)
