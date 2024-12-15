@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+        x:Class="MovieFinder.Components.TouchyBorder">
+    <Border.Behaviors>
+        <toolkit:TouchBehavior 
+            DefaultAnimationDuration="{StaticResource TouchBehaviorAnimationDuration}"
+            DefaultAnimationEasing="{StaticResource TouchBehaviorAnimationEasing}" 
+            PressedOpacity="{StaticResource TouchBehaviorPressedOpacity}"
+            PressedScale="{StaticResource TouchBehaviorPressedScale}" 
+            HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}" 
+            PressedBackgroundColor="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
+    </Border.Behaviors>
+</Border>

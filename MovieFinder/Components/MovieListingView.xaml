@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieFinder.Components.MovieListingView"
              xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
+             xmlns:components="clr-namespace:MovieFinder.Components"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <ContentView.Content>
         <!-- Movie listing -->
@@ -14,19 +15,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels:IMovieViewModel">
                         <Border Padding="20" Margin="0" StrokeThickness="2">
+                            <VerticalStackLayout Spacing="0">
+                                <components:TouchyBorder Padding="10">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Path=GetMovieDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
                             </Border.GestureRecognizers>
-                            <Border.Behaviors>
-                                <toolkit:TouchBehavior 
-                                    DefaultAnimationDuration="{StaticResource TouchBehaviorAnimationDuration}" 
-                                    DefaultAnimationEasing="{StaticResource TouchBehaviorAnimationEasing}" 
-                                    PressedOpacity="{StaticResource TouchBehaviorPressedOpacity}" 
-                                    PressedScale="{StaticResource TouchBehaviorPressedScale}" 
-                                    HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}" 
-                                    PressedBackgroundColor="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
-                            </Border.Behaviors>
-
                             <VerticalStackLayout Spacing="10">
                                 <Label Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
                                 <Image Source="{Binding PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
@@ -71,6 +64,8 @@
                                     <Label Grid.Row="4" Grid.Column="0" Text="Overview: " FontAttributes="Bold"/>
                                     <Label Grid.Row="4" Grid.Column="1" Text="{Binding Overview}"/>
                                 </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </components:TouchyBorder>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
