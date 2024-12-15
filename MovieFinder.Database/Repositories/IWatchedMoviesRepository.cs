@@ -22,6 +22,13 @@ public interface IWatchedMoviesRepository
     Task DeleteMovieAsync(WatchedMovieEntity movie);
 
     /// <summary>
+    /// Deletes a movie from the database.
+    /// </summary>
+    /// <param name="movieId">The ID of the movie to delete.</param>
+    /// <returns><see cref="Task"/></returns>
+    Task DeleteMovieAsync(int movieId);
+
+    /// <summary>
     /// Fetches all movies from the database.
     /// </summary>
     /// <returns>A collection of <see cref="WatchedMovieEntity"/>.</returns>

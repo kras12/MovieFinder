@@ -59,6 +59,16 @@ public class WatchedMoviesRepository : IWatchedMoviesRepository
     }
 
     /// <summary>
+    /// Deletes a movie from the database.
+    /// </summary>
+    /// <param name="movieId">The ID of the movie to delete.</param>
+    /// <returns><see cref="Task"/></returns>
+    public Task DeleteMovieAsync(int movieId)
+    {
+        return DeleteMovieAsync(new WatchedMovieEntity() { MovieId = movieId });
+    }
+
+    /// <summary>
     /// Fetches all movies from the database.
     /// </summary>
     /// <returns>A collection of <see cref="WatchedMovieEntity"/>.</returns>
