@@ -49,6 +49,13 @@ public interface IWatchedMoviesRepository
     Task<bool> MovieExists(string title);
 
     /// <summary>
+    /// Checks whether a movie exists in the database.
+    /// </summary>
+    /// <param name="title">The ID of the movie.</param>
+    /// <returns>True if the movie exists.</returns>
+    Task<bool> MovieExists(int movieId);
+
+    /// <summary>
     /// Returns the number of movies in the database.
     /// </summary>
     /// <returns>The number of movies in the form of an <see cref="int"/>.</returns>
