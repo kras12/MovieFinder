@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
+             xmlns:components="clr-namespace:MovieFinder.Components"
              x:Class="MovieFinder.Pages.WatchedMoviesPage"
              Title="Watched Movies"
              x:DataType="viewmodels:IWatchedMoviesPageViewModel">
@@ -17,7 +18,7 @@
                         <VerticalStackLayout HorizontalOptions="Center">
                             <Label Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
                             <Label Grid.Column="1" Grid.Row="1" Margin="5,0,0,0" Text="{Binding UserVoteText}" Padding="5" HorizontalTextAlignment="Center"/>
-                            <ImageButton Grid.ColumnSpan="2" Grid.Row="2" Source="heart_circle_minus.png" HeightRequest="44" WidthRequest="44" Padding="5" 
+                            <components:TouchyImageButton Grid.ColumnSpan="2" Grid.Row="2" Source="heart_circle_minus.png" HeightRequest="44" WidthRequest="44" Padding="5" 
                                 Command="{Binding DeleteMovieCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IWatchedMoviesPageViewModel}}}" CommandParameter="{Binding}"/>
                         </VerticalStackLayout>
                     </Border>
