@@ -50,6 +50,10 @@ public class AutoMapperProfile : Profile
             .ConstructUsingServiceLocator()
             .ForMember(dest => dest.MovieId, opt => opt.MapFrom(dest => dest.MovieId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
+            .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote))
+            .ReverseMap()
+            .ForMember(dest => dest.MovieId, opt => opt.MapFrom(dest => dest.MovieId))
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
             .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote));
     }
 }
