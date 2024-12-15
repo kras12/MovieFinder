@@ -13,4 +13,10 @@
             <ShellContent ContentTemplate="{DataTemplate pages:MovieDiscoveryPage}"/>
         </Tab>
     </FlyoutItem>    
+
+    <FlyoutItem Title="Watched Movies">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:WatchedMoviesPage}"/>
+        </Tab>
+    </FlyoutItem>
 </Shell>

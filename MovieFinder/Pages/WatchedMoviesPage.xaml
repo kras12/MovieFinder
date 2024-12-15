@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
+             x:Class="MovieFinder.Pages.WatchedMoviesPage"
+             Title="Watched Movies"
+             x:DataType="viewmodels:IWatchedMoviesPageViewModel">
+    <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
+        <Label Text="{Binding PageTitle}" FontSize="Header" HorizontalTextAlignment="Center"/>
+        <CollectionView ItemsSource="{Binding Movies}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:IWatchedMovieViewModel">
+                    <Border StrokeThickness="2" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="200" >
+                        <Grid HorizontalOptions="Center" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="0" Grid.Row="1" Text="Your vote:" Padding="5"/>
+                        <Label Grid.Column="1" Grid.Row="1" Margin="5,0,0,0" Text="{Binding Vote}" Padding="5" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

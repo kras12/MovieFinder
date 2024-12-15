@@ -42,6 +42,8 @@ namespace MovieFinder
             builder.Services.AddTransient<IMovieDetailsPageViewModel, MovieDetailsPageViewModel>();
             builder.Services.AddTransient<IMovieSearchFilterViewModel, MovieSearchFilterViewModel>();
             builder.Services.AddTransient<IMovieSearchResultViewModel, MovieSearchResultViewModel>();
+            builder.Services.AddTransient<IWatchedMovieViewModel, WatchedMovieViewModel>();
+            builder.Services.AddTransient<IWatchedMoviesPageViewModel, WatchedMoviesPageViewModel>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MovieFinder.Data.Models;
+using MovieFinder.Database.Entities;
 using MovieFinder.ViewModels.Interfaces;
 
 namespace MovieFinder.Mapping;
@@ -44,5 +45,11 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Results, opt => opt.MapFrom(src => src.Results))
             .ForMember(dest => dest.TotalPages, opt => opt.MapFrom(src => src.TotalPages))
             .ForMember(dest => dest.TotalResults, opt => opt.MapFrom(src => src.TotalResults));
+
+        CreateMap<WatchedMovieEntity, IWatchedMovieViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.MovieId, opt => opt.MapFrom(dest => dest.MovieId))
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
+            .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote));
     }
 }
