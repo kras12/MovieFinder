@@ -48,12 +48,25 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
     }
 
     /// <summary>
+    /// A formatted text to show the user's vote for the movie. 
+    /// </summary>
+    public string UserVoteText
+    {
+        get => $"Your vote: {Vote}";
+    }
+
+    /// <summary>
     /// The user's vote for this movie. 
     /// </summary>
-    public int Vote 
+    public int Vote
     {
         get => _vote;
-        set => SetProperty(ref _vote, value);
+
+        set
+        {
+            SetProperty(ref _vote, value);
+            OnPropertyChanged(nameof(UserVoteText));
+        }
     }
 
     #endregion

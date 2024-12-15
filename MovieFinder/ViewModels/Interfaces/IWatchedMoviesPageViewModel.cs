@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace MovieFinder.ViewModels.Interfaces;
 
@@ -8,6 +9,11 @@ namespace MovieFinder.ViewModels.Interfaces;
 public interface IWatchedMoviesPageViewModel
 {
     /// <summary>
+    /// Deletes a movie from the database. 
+    /// </summary>
+    public IAsyncRelayCommand<IWatchedMovieViewModel> DeleteMovieCommand { get; }
+
+    /// <summary>
     /// A collection of movies that the use have watched. 
     /// </summary>
     public ObservableCollection<IWatchedMovieViewModel> Movies { get; set; }
@@ -15,5 +21,5 @@ public interface IWatchedMoviesPageViewModel
     /// <summary>
     /// The title that is shown above the movie list.
     /// </summary>
-    string PageTitle { get; }
+    public string PageTitle { get; }
 }

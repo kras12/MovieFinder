@@ -13,6 +13,11 @@ public interface IWatchedMovieViewModel
     public string Title { get; set; }
 
     /// <summary>
+    /// A formatted text to show the user's vote for the movie. 
+    /// </summary>
+    string UserVoteText { get; }
+
+    /// <summary>
     /// The user's vote for this movie. 
     /// </summary>
     public int Vote {  get; set; }

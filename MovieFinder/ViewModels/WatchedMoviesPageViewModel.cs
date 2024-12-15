@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Database.Repositories;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
@@ -28,6 +29,7 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
     /// Backing field for property <see cref="Movies"/>.
     /// </summary>    
     private ObservableCollection<IWatchedMovieViewModel> _movies = [];
+
     #endregion
 
     #region Constructors
@@ -49,8 +51,33 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
 
     #endregion
 
+    #region Commands
+
+    /// <summary>
+    /// Deletes a movie from the database. 
+    /// </summary>
+    /// <param name="movie">The movie to delete.</param>
+    /// <returns></returns>
+    [RelayCommand]
+    private async Task DeleteMovie(IWatchedMovieViewModel movie)
+    {
+        try
+        {
+            if (await _watchedMoviesRepository.MovieExists(movie.MovieId))
+            {
+                await _watchedMoviesRepository.DeleteMovieAsync(movie.MovieId);
+            }            
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }        
+    }
+
+    #endregion
+
     #region Properties
-    
+
     /// <summary>
     /// A collection of movies that the use have watched. 
     /// </summary>
