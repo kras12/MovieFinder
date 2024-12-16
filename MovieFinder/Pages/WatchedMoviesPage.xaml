@@ -25,5 +25,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Label Text="You have not saved any movies." FontSize="Medium" IsVisible="{Binding Movies.Count, Converter={StaticResource InverseCountToBooleanConverter}}"/>
     </VerticalStackLayout>
 </ContentPage>
