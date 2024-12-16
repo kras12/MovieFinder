@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MovieFinder.Data.Models;
+using MovieFinder.Data.Sorting;
 using MovieFinder.Database.Entities;
 using MovieFinder.ViewModels.Interfaces;
 
@@ -60,5 +61,11 @@ public class AutoMapperProfile : Profile
         CreateMap<IMovieViewModel, WatchedMovieEntity>()
             .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title));
+
+        CreateMap<MovieSortValue, IMovieSortValueViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.SortType, opt => opt.MapFrom(src => src.SortType))
+            .ReverseMap()
+            .ConstructUsing(src => MovieSortHelper.GetSortValue(src.SortType));
     }
 }

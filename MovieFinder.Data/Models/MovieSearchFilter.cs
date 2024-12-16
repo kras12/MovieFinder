@@ -1,4 +1,6 @@
-﻿namespace MovieFinder.Data.Models;
+﻿using MovieFinder.Data.Sorting;
+
+namespace MovieFinder.Data.Models;
 
 /// <summary>
 /// Contains filter data for movie searches.
@@ -6,6 +8,11 @@
 public class MovieSearchFilter
 {
     #region Properties
+
+    /// <summary>
+    /// The default sort order for the search. 
+    /// </summary>
+    public MovieSortValue DefaultSortBy { get; } = MovieSortHelper.ByPopularityDescValue;
 
     /// <summary>
     /// Set to true to include adult movies.
@@ -28,11 +35,10 @@ public class MovieSearchFilter
     /// </summary>
     public int Page { get; set; } = 1;
 
-    // TODO - Convert sort options to an enum later. 
     /// <summary>
-    /// Sets the sort field and sort order for the search. 
+    /// The sort order for the search. 
     /// </summary>
-    public string SortBy { get; set; } = "popularity.desc";
+    public MovieSortValue? SortBy { get; set; } = null;
 
     /// <summary>
     /// Filters the movies by category ID.

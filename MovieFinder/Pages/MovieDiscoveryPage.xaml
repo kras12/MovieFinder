@@ -23,7 +23,9 @@
             <Border Padding="10" BackgroundColor="{StaticResource SubPanelBackgroundColor}">
                 <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
                     <Picker Title="Filter by category" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" TitleColor="{StaticResource Black}" TextColor="{StaticResource Black}" FontSize="Subtitle"
-                    ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
+                        ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
+                    <Picker Title="Sort by" TitleColor="{StaticResource Black}" TextColor="{StaticResource Black}" FontSize="Subtitle" 
+                            ItemsSource="{Binding MovieSearchFilter.MovieSortValues}" ItemDisplayBinding="{Binding SortDescription}" SelectedItem="{Binding MovieSearchFilter.SortBy}"/>
                     <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
                 </VerticalStackLayout>
             </Border>

@@ -13,9 +13,19 @@ public interface IMovieSearchFilterViewModel
     public ObservableCollection<IMovieCategoryViewModel> MovieCategories { get; set; }
 
     /// <summary>
+    /// A collection of all movie sort types.
+    /// </summary>
+    public ObservableCollection<IMovieSortValueViewModel> MovieSortValues { get; set; }
+
+    /// <summary>
     /// The page of the search result being requested. 
     /// </summary>
     public int Page { get; set; }
+
+    /// <summary>
+    /// The sort order for the search. 
+    /// </summary>
+    public IMovieSortValueViewModel? SortBy { get; set; }
 
     /// <summary>
     /// Filters the movies by category

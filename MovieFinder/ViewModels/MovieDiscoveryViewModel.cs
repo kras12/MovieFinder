@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Data.Models;
 using MovieFinder.Data.Services;
+using MovieFinder.Data.Sorting;
 using MovieFinder.Database.Entities;
 using MovieFinder.Database.Repositories;
 using MovieFinder.Pages;
@@ -82,12 +83,17 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         MovieSearchResult = movieSearchResult;
         _watchedMoviesRepository = watchedMoviesRepository;
 
+        // TODO - Move some of these initializations into a factory service? 
+
         MovieSearchFilter.MovieCategories =
            new ObservableCollection<IMovieCategoryViewModel>(_mapper.Map<List<IMovieCategoryViewModel>>(_movieCategoryCacheService.GetAllCategories()));
 
         _allCategory = _mapper.Map<IMovieCategoryViewModel>(new MovieCategory() { Id = 0, Name = "All" });
         MovieSearchFilter.MovieCategories.Insert(0, _allCategory);
         MovieSearchFilter.WithCategory = _allCategory;
+
+        MovieSearchFilter.MovieSortValues = new ObservableCollection<IMovieSortValueViewModel>(_mapper.Map<List<IMovieSortValueViewModel>>(MovieSortHelper.AllSortValues));
+        MovieSearchFilter.SortBy = MovieSearchFilter.MovieSortValues.FirstOrDefault();
 
         SearchMovies();        
     }

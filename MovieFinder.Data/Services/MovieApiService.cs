@@ -143,13 +143,14 @@ public class MovieApiService : IMovieApiService
     /// <returns><see cref="string"/></returns>
     private string BuildSearchMovieQueryString(MovieSearchFilter filter)
     {
+        var sortBy = filter.SortBy ?? filter.DefaultSortBy;
         StringBuilder stringBuilder = new();
 
         stringBuilder.Append("?");
         stringBuilder.Append($"include_video={BooleanToString(filter.IncludeVideo)}");
         stringBuilder.Append($"&include_adult={BooleanToString(filter.IncludeAdult)}");
         stringBuilder.Append($"&language={filter.Language}");
-        stringBuilder.Append($"&sort_by={filter.SortBy}");
+        stringBuilder.Append($"&sort_by={sortBy.ApiQueryString}");
         stringBuilder.Append($"&page={filter.Page}");
 
         if (filter.WithCategory.HasValue)

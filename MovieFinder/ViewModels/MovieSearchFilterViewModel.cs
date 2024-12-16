@@ -17,6 +17,16 @@ public partial class MovieSearchFilterViewModel : ObservableObject, IMovieSearch
     private ObservableCollection<IMovieCategoryViewModel> _movieCategories = [];
 
     /// <summary>
+    /// Backing field for property <see cref="MovieSortValues"/>.
+    /// </summary>
+    private ObservableCollection<IMovieSortValueViewModel> _movieSortTypes = [];
+
+    /// <summary>
+    /// Backing field for property <see cref="SortBy"/>.
+    /// </summary>
+    private IMovieSortValueViewModel? _sortBy;
+
+    /// <summary>
     /// Backing field for property <see cref="WithCategory"/>.
     /// </summary>
     private IMovieCategoryViewModel? _withCategory;
@@ -35,9 +45,27 @@ public partial class MovieSearchFilterViewModel : ObservableObject, IMovieSearch
     }
 
     /// <summary>
+    /// A collection of all movie sort types.
+    /// </summary>
+    public ObservableCollection<IMovieSortValueViewModel> MovieSortValues
+    {
+        get => _movieSortTypes;
+        set => SetProperty(ref _movieSortTypes, value);
+    }
+
+    /// <summary>
     /// Sets the page of the search result being requested. 
     /// </summary>
     public int Page { get; set; } = 1;
+
+    /// <summary>
+    /// The sort order for the search. 
+    /// </summary>
+    public IMovieSortValueViewModel? SortBy
+    {
+        get => _sortBy;
+        set => SetProperty(ref _sortBy, value);
+    }
 
     /// <summary>
     /// Filters the movies by category
