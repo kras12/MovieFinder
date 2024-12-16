@@ -11,14 +11,26 @@
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Padding>
             <OnPlatform Default="10"/>
         </Grid.Padding>
 
+        <!-- Filter panel -->
+        <ContentView Grid.Row="0" IsVisible="{Binding IsMovieFiltersOpen}">
+            <Border Padding="10" BackgroundColor="{StaticResource SubPanelBackgroundColor}">
+                <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
+                    <Picker Title="Filter by category" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" TitleColor="{StaticResource Black}" TextColor="{StaticResource Black}" FontSize="Subtitle"
+                    ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
+                    <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
+                </VerticalStackLayout>
+            </Border>
+        </ContentView>
+
         <!-- Menu panel -->
-        <VerticalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
+        <VerticalStackLayout Grid.Row="1" Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Spacing="0">
                 <components:TouchyImageButton Source="filter.png" HeightRequest="44" WidthRequest="44" Padding="5" HorizontalOptions="Center" VerticalOptions="Center" 
                     Command="{Binding OpenMovieFiltersCommand}" ToolTipProperties.Text="Manage filters."/>
@@ -37,16 +49,6 @@
         </VerticalStackLayout>
 
         <!-- Movie listing -->
-        <components:MovieListingView Grid.Row="1" ViewModel="{Binding}"/>
-
-        <ContentView IsVisible="{Binding IsMovieFiltersOpen}">
-            <Border Padding="10" BackgroundColor="LightBlue">
-                <VerticalStackLayout HorizontalOptions="Center" MinimumWidthRequest="150" Spacing="10">
-                    <Picker Title="Filter by category" ItemsSource="{Binding MovieSearchFilter.MovieCategories}" 
-                            ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding MovieSearchFilter.WithCategory}"/>
-                    <Button Text="Apply" Command="{Binding ApplyMovieFiltersCommand}"/>
-                </VerticalStackLayout>
-            </Border>
-        </ContentView>
+        <components:MovieListingView Grid.Row="2" ViewModel="{Binding}"/>
     </Grid>
 </ContentPage>
