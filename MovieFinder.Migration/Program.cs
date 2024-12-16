@@ -1,15 +1,16 @@
-﻿using System;
+﻿namespace MovieFinder.Migration;
 
-namespace YourNamespace
+/// <summary>
+/// This application is just used to faciliate creating migrations, as it's not supported on MAUI projects. 
+/// </summary>
+class Program
 {
     /// <summary>
-    /// This application is just used to faciliate creating migrations, as it's not supported on MAUI projects. 
+    /// The main method.
     /// </summary>
-    class Program
+    /// <param name="args">Application arguments.</param>
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            
-        }
+
     }
 }

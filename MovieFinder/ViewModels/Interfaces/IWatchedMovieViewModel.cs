@@ -1,5 +1,8 @@
 ﻿namespace MovieFinder.ViewModels.Interfaces;
 
+/// <summary>
+/// Interface for a viewmodel for a watched movie. 
+/// </summary>
 public interface IWatchedMovieViewModel
 {
     /// <summary>

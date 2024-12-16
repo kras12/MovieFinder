@@ -68,7 +68,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     /// <summary>
     /// Backing field for property <see cref="PosterPath"/>.
     /// </summary>
-    private string _posterPath = "";
+    private string? _posterPath = "";
 
     /// <summary>
     /// Backing field for property <see cref="ReleaseDate"/>.

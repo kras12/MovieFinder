@@ -33,7 +33,6 @@ public class WatchedMoviesRepository : IWatchedMoviesRepository
 
     #region Methods
 
-
     /// <summary>
     /// Adds a movie to the database.
     /// </summary>
