@@ -3,20 +3,16 @@
     x:Class="MovieFinder.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MovieFinder"
     xmlns:pages="clr-namespace:MovieFinder.Pages"
     Shell.FlyoutBehavior="Flyout"
     Title="MovieFinder">
 
-    <FlyoutItem Title="Movie Discovery">
-        <Tab>
+    <TabBar>
+        <Tab Title="Movie Discovery">
             <ShellContent ContentTemplate="{DataTemplate pages:MovieDiscoveryPage}"/>
         </Tab>
-    </FlyoutItem>    
-
-    <FlyoutItem Title="Watched Movies">
-        <Tab>
+        <Tab Title="Watched Movies">
             <ShellContent ContentTemplate="{DataTemplate pages:WatchedMoviesPage}"/>
         </Tab>
-    </FlyoutItem>
+    </TabBar>
 </Shell>
