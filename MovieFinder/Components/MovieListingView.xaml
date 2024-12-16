@@ -29,7 +29,7 @@
                                         <TapGestureRecognizer Command="{Binding Path=GetMovieDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:IMovieListingViewModel}}}" CommandParameter="{Binding}"/>
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout Spacing="10">
-                                        <Label Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Title}" FontSize="Title" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
                                         <Image Source="{Binding PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
                                         <Border Margin="0,0,0,0">
                                             <Grid>
