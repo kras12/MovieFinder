@@ -7,9 +7,10 @@
         <toolkit:TouchBehavior 
             DefaultAnimationDuration="{StaticResource TouchBehaviorAnimationDuration}"
             DefaultAnimationEasing="{StaticResource TouchBehaviorAnimationEasing}" 
+            HoveredOpacity="{StaticResource TouchBehaviorHoveredOpacity}"
+            HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}"
             PressedOpacity="{StaticResource TouchBehaviorPressedOpacity}"
             PressedScale="{StaticResource TouchBehaviorPressedScale}" 
-            HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}" 
             PressedBackgroundColor="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
     </Border.Behaviors>
 </Border>
