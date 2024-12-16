@@ -4,23 +4,14 @@
              x:Class="MovieFinder.Pages.MovieDetailsPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:MovieFinder.ViewModels.Interfaces"
+             xmlns:components="clr-namespace:MovieFinder.Components"
              x:DataType="viewmodels:IMovieDetailsPageViewModel"
              Title="MovieDetails">
 
     <ScrollView Padding="10">
         <VerticalStackLayout Spacing="10">
             <Button Text="Back" Command="{Binding NavigateBackCommand}" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Border Padding="10">
-                <Border.Behaviors>
-                    <toolkit:TouchBehavior 
-                        DefaultAnimationDuration="{StaticResource TouchBehaviorAnimationDuration}" 
-                        DefaultAnimationEasing="{StaticResource TouchBehaviorAnimationEasing}" 
-                        PressedOpacity="{StaticResource TouchBehaviorPressedOpacity}" 
-                        PressedScale="{StaticResource TouchBehaviorPressedScale}" 
-                        HoveredBackgroundColor="{StaticResource TouchBehaviorHoveredBackgroundColor}" 
-                        PressedBackgroundColor="{StaticResource TouchBehaviorPressedBackgroundColor}"/>
-                </Border.Behaviors>
-
+            <components:TouchyBorder Padding="10">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="{Binding Movie.Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
                     <Image Source="{Binding Movie.PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
@@ -67,7 +58,7 @@
                         <Label Grid.Row="4" Grid.Column="1" Text="{Binding Movie.Overview}"/>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
-            </Border>
+            </components:TouchyBorder>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
