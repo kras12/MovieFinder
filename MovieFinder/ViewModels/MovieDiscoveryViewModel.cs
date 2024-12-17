@@ -6,6 +6,7 @@ using MovieFinder.Data.Services;
 using MovieFinder.Data.Sorting;
 using MovieFinder.Database.Entities;
 using MovieFinder.Database.Repositories;
+using MovieFinder.Helpers;
 using MovieFinder.Pages;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
@@ -126,6 +127,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
             var result = await _watchedMoviesRepository.CreateMovieAsync(_mapper.Map<WatchedMovieEntity>(movie));
             movie.IsWatched = true;
             DeleteWatchedMovieCommand.NotifyCanExecuteChanged();
+            await ToastHelper.ShowToast($"{movie.Title} was added to your watched list!");
         }
     }
 
@@ -146,6 +148,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
                 await _watchedMoviesRepository.DeleteMovieAsync(targetMovie);
                 movie.IsWatched = false;
                 CreateWatchedMovieCommand.NotifyCanExecuteChanged();
+                await ToastHelper.ShowToast($"{movie.Title} was deleted from your watched list!");
             }
         }
     }

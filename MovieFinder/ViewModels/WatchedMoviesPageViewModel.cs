@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MovieFinder.Database.Repositories;
+using MovieFinder.Helpers;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -68,6 +69,7 @@ public partial class WatchedMoviesPageViewModel : ObservableObject, IWatchedMovi
                 await _watchedMoviesRepository.DeleteMovieAsync(movie.WatchedMovieId);
                 Movies.Remove(movie);
                 OnPropertyChanged(nameof(PageTitle));
+                await ToastHelper.ShowToast($"{movie.Title} was deleted from your watched list!");
             }            
         }
         catch (Exception ex)
