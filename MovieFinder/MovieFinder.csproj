@@ -90,6 +90,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\LoadingIndicator.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\TouchyBorder.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
