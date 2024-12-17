@@ -8,6 +8,11 @@ public class WatchedMovieEntity
     public int ApiMovieId { get; init; }
 
     /// <summary>
+    /// Path to a poster image for the movie.
+    /// </summary>
+    public string PosterPath { get; init; } = "";
+
+    /// <summary>
     /// The title of the movie.
     /// </summary>
     public string Title { get; init; } = "";

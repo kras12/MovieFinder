@@ -14,7 +14,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     /// <summary>
     /// The base url path for fetching all movie images. 
     /// </summary>
-    private const string ImageBasePath = "https://image.tmdb.org/t/p/w300";
+    private const string ImageBasePath = "https://image.tmdb.org/t/p/w300"; // TODO - Move
 
     #endregion
 

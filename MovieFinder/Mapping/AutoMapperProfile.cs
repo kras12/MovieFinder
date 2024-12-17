@@ -53,14 +53,17 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(dest => dest.ApiMovieId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
             .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote))
+            .ForMember(dest => dest.PosterPath, opt => opt.MapFrom(dest => dest.PosterPath))
             .ReverseMap()
             .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(dest => dest.ApiMovieId))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(dest => dest.Title))
-            .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote));
+            .ForMember(dest => dest.Vote, opt => opt.MapFrom(dest => dest.Vote))
+            .ForMember(dest => dest.PosterPath, opt => opt.MapFrom(dest => dest.PosterPath));
 
         CreateMap<IMovieViewModel, WatchedMovieEntity>()
             .ForMember(dest => dest.ApiMovieId, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title));
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+            .ForMember(dest => dest.PosterPath, opt => opt.MapFrom(src => src.PosterPath));
 
         CreateMap<MovieSortValue, IMovieSortValueViewModel>()
             .ConstructUsingServiceLocator()

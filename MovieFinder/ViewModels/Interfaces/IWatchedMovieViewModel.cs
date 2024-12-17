@@ -11,6 +11,11 @@ public interface IWatchedMovieViewModel
     public int ApiMovieId { get; set; }
 
     /// <summary>
+    /// Path to a poster image for the movie.
+    /// </summary>
+    string? PosterPath { get; init; }
+
+    /// <summary>
     /// The title of the movie.
     /// </summary>
     public string Title { get; set; }

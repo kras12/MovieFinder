@@ -8,12 +8,26 @@ namespace MovieFinder.ViewModels;
 /// </summary>
 public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieViewModel
 {
+    #region Constants
+
+    /// <summary>
+    /// The base url path for fetching all movie images. 
+    /// </summary>
+    private const string ImageBasePath = "https://image.tmdb.org/t/p/w300"; // TODO - Move
+
+    #endregion
+
     #region Fields
-    
+
     /// <summary>
     /// Backing field for property <see cref="ApiMovieId"/>.
     /// </summary>
     private int _apiMovieId;
+
+    /// <summary>
+    /// Backing field for property <see cref="PosterPath"/>.
+    /// </summary>
+    private string? _posterPath = "";
 
     /// <summary>
     /// Backing field for property <see cref="Title"/>.
@@ -37,17 +51,26 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
     /// <summary>
     /// The ID of the API movie. 
     /// </summary>
-    public int ApiMovieId 
+    public int ApiMovieId
     {
-        get => _apiMovieId; 
+        get => _apiMovieId;
         set => SetProperty(ref _apiMovieId, value);
+    }
+
+    /// <summary>
+    /// Path to a poster image for the movie.
+    /// </summary>
+    public string? PosterPath
+    {
+        get => _posterPath;
+        init => SetProperty(ref _posterPath, value != null ? ConstructImagePath(value) : null);
     }
 
     /// <summary>
     /// The title of the movie.
     /// </summary>
-    public string Title 
-    { 
+    public string Title
+    {
         get => _title;
         set => SetProperty(ref _title, value);
     }
@@ -81,6 +104,20 @@ public partial class WatchedMovieViewModel : ObservableObject, IWatchedMovieView
     {
         get => _watchedMovieId;
         set => SetProperty(ref _watchedMovieId, value);
+    }
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Returns the complete URL for a movie image. 
+    /// </summary>
+    /// <param name="relativeImagePath">The relative image URL path.</param>
+    /// <returns><see cref="string"/></returns>
+    private string ConstructImagePath(string relativeImagePath)
+    {
+        return $"{ImageBasePath}/{relativeImagePath.TrimStart(['/'])}";
     }
 
     #endregion
