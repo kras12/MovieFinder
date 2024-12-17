@@ -47,6 +47,11 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     private readonly IWatchedMoviesRepository _watchedMoviesRepository;
 
     /// <summary>
+    /// Backing field for property <see cref="IsBusy"/>.
+    /// </summary>
+    private bool _isBusy;
+
+    /// <summary>
     /// Backing field for property <see cref="IsMovieFiltersOpen"/>
     /// </summary>
     private bool _isMovieFiltersOpen;
@@ -57,7 +62,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     private IMovieSearchFilterViewModel _movieSearchFilter;
 
     /// <summary>
-    /// Backing field for property <see cref="Data.Models.MovieSearchResult"/>.
+    /// Backing field for property <see cref="MovieSearchResult"/>.
     /// </summary>
     private IMovieSearchResultViewModel _movieSearchResult;
 
@@ -273,6 +278,15 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         }
     }
 
+    /// <summary>
+    /// Returns true while the view model is busy. 
+    /// </summary>
+    public bool IsBusy
+    {
+        get => _isBusy; 
+        private set => SetProperty(ref _isBusy, value); 
+    }
+
     #endregion
 
     #region Methods
@@ -330,6 +344,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     {
         try
         {
+            IsBusy = true;
             var response = await _movieApiService.SearchMovies(_mapper.Map<MovieSearchFilter>(MovieSearchFilter));
 
             if (response.IsSuccess && response.Data != null)
@@ -347,6 +362,10 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
         catch (Exception ex)
         {
             Debug.WriteLine($"Error when searching for movies: {ex.Message}");
+        }
+        finally 
+        {
+            IsBusy = false; 
         }
     }
 

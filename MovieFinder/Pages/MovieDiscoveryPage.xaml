@@ -52,5 +52,8 @@
 
         <!-- Movie listing -->
         <components:MovieListingView Grid.Row="2" ViewModel="{Binding}"/>
+
+        <!-- Overlayed loading indicator -->
+        <components:LoadingIndicator Grid.RowSpan="3" IsVisible="{Binding IsBusy}"/>
     </Grid>
 </ContentPage>

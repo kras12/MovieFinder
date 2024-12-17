@@ -38,6 +38,11 @@ public interface IMovieDiscoveryViewModel
     public IAsyncRelayCommand GetPreviousMovieSearchPageCommand { get; }
 
     /// <summary>
+    /// Returns true while the view model is busy. 
+    /// </summary>
+    public bool IsBusy { get; }
+
+    /// <summary>
     /// Returns true if the movie filters view is open. 
     /// </summary>
     public bool IsMovieFiltersOpen { get; set; }
