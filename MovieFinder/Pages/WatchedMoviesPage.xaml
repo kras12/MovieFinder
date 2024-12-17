@@ -7,7 +7,7 @@
              Title="Watched Movies"
              x:DataType="viewmodels:IWatchedMoviesPageViewModel">
     <VerticalStackLayout HorizontalOptions="Center" Spacing="20">
-        <Label Text="{Binding PageTitle}" FontSize="Header" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding PageTitle}" FontSize="Title" HorizontalTextAlignment="Center"/>
         <CollectionView ItemsSource="{Binding Movies}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"/>
