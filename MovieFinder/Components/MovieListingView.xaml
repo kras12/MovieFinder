@@ -8,7 +8,7 @@
     <ContentView.Content>
         <!-- Movie listing -->
         <ScrollView>
-            <CollectionView x:DataType="viewmodels:IMovieListingViewModel" ItemsSource="{Binding Movies}" Margin="0,-10,0,0">
+            <CollectionView x:DataType="viewmodels:IMovieListingViewModel" ItemsSource="{Binding Movies}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"></LinearItemsLayout>
                 </CollectionView.ItemsLayout>
