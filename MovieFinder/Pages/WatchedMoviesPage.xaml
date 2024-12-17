@@ -6,7 +6,7 @@
              x:Class="MovieFinder.Pages.WatchedMoviesPage"
              Title="Watched Movies"
              x:DataType="viewmodels:IWatchedMoviesPageViewModel">
-    <Grid>
+    <Grid RowSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -14,7 +14,7 @@
         
         <Label Grid.Row="0" Text="{Binding PageTitle}" FontSize="Title" HorizontalTextAlignment="Center"/>
         <ScrollView Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Movies}">
+            <CollectionView ItemsSource="{Binding Movies}" IsVisible="{Binding Movies.Count}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -33,6 +33,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-        <Label Text="You have not saved any movies." FontSize="Medium" IsVisible="{Binding Movies.Count, Converter={StaticResource InverseCountToBooleanConverter}}"/>
+        <Label Grid.Row="1" Text="You have not saved any movies." FontSize="Medium" HorizontalOptions="Center" IsVisible="{Binding Movies.Count, Converter={StaticResource InverseCountToBooleanConverter}}"/>
     </Grid>
 </ContentPage>
