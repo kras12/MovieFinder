@@ -52,6 +52,8 @@ public static class MauiProgram
         builder.Services.AddTransient<IWatchedMovieViewModel, WatchedMovieViewModel>();
         builder.Services.AddTransient<IWatchedMoviesPageViewModel, WatchedMoviesPageViewModel>();
         builder.Services.AddTransient<IMovieSortValueViewModel, MovieSortValueViewModel>();
+        builder.Services.AddTransient<IMovieImageViewModel,  MovieImageViewModel>();
+        builder.Services.AddTransient<IMovieImageSearchResultViewModel, MovieImageSearchResultViewModel>();
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         {

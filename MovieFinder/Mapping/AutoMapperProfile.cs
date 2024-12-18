@@ -70,5 +70,20 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.SortType, opt => opt.MapFrom(src => src.SortType))
             .ReverseMap()
             .ConstructUsing(src => MovieSortHelper.GetSortValue(src.SortType));
+
+        CreateMap<MovieImage, IMovieImageViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.FilePath, opt => opt.MapFrom(src => src.FilePath))
+            .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.Height))
+            .ForMember(dest => dest.LanguageCode, opt => opt.MapFrom(src => src.Iso6391))
+            .ForMember(dest => dest.VoteAverage, opt => opt.MapFrom(src => src.VoteAverage))
+            .ForMember(dest => dest.VoteCount, opt => opt.MapFrom(src => src.VoteCount))
+            .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.Width));
+
+        CreateMap<MovieImageSearchResult, IMovieImageSearchResultViewModel>()
+            .ConstructUsingServiceLocator()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Logos, opt => opt.MapFrom(src => src.Logos))
+            .ForMember(dest => dest.Posters, opt => opt.MapFrom(src => src.Posters));
     }
 }

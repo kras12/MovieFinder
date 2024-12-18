@@ -8,12 +8,17 @@ namespace MovieFinder.ViewModels.Interfaces;
 public interface IMovieDetailsPageViewModel
 {
     /// <summary>
-    /// Navigates back to the previous page.
-    /// </summary>
-    IAsyncRelayCommand NavigateBackCommand { get; }
-
-    /// <summary>
     /// The movie to show details for. 
     /// </summary>
-    IMovieViewModel Movie { get; }
+    public IMovieViewModel Movie { get; }
+
+    /// <summary>
+    /// Contains the result from a movie search.
+    /// </summary>
+    public IMovieImageSearchResultViewModel MovieImages { get; }
+
+    /// <summary>
+    /// Navigates back to the previous page.
+    /// </summary>
+    public IAsyncRelayCommand NavigateBackCommand { get; }
 }

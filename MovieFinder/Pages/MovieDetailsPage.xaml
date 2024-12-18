@@ -17,7 +17,7 @@
         </Grid>
         <Border Grid.Row="1" StrokeThickness="2" Stroke="Gray">
             <ScrollView Padding="10">
-                <components:TouchyBorder Padding="10" Margin="0,10,0,0">
+                <Border Padding="10" Margin="0,10,0,0">
                     <VerticalStackLayout Spacing="10">
                         <Label Text="{Binding Movie.Title}" FontSize="Title" HorizontalTextAlignment="Center"/>
                         <Image Source="{Binding Movie.PosterPath}" Aspect="AspectFit" MaximumHeightRequest="400"/>
@@ -63,9 +63,25 @@
                             <Label Grid.Row="4" Grid.Column="0" Text="Overview: " FontAttributes="Bold"/>
                             <Label Grid.Row="4" Grid.Column="1" Text="{Binding Movie.Overview}"/>
                         </VerticalStackLayout>
+                        <VerticalStackLayout Margin="0,0,0,0">
+                            <Label Grid.Row="4" Grid.Column="0" Text="Images: " FontAttributes="Bold"/>
+                            <CollectionView ItemsSource="{Binding MovieImages.ImagesForDisplay}" VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="viewmodels:IMovieImageViewModel">
+                                        <Image Source="{Binding FilePath}" HeightRequest="200" Margin="0,10,0,0"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
-                </components:TouchyBorder>
+                </Border>
             </ScrollView>
         </Border>
+
+        <!-- Overlayed loading indicator -->
+        <components:LoadingIndicator Grid.RowSpan="2" IsVisible="{Binding IsBusy}"/>
     </Grid>
 </ContentPage>

@@ -20,9 +20,16 @@ public interface IMovieApiService
     public Task<ApiResponse<MovieCategoryCollection>> GetMovieCategories();
 
     /// <summary>
+    /// Fetches the images for a movie.
+    /// </summary>
+    /// <param name="movieId">The ID of the movie.</param>
+    /// <returns><see cref="MovieImageSearchResult"/></returns>
+    public Task<ApiResponse<MovieImageSearchResult>> GetMovieImages(int movieId);
+
+    /// <summary>
     /// Searches for movies according to the supplied filters.
     /// </summary>
     /// <param name="filter">The search filters.</param>
     /// <returns><see cref="ApiResponse{T}"/></returns>
-    Task<ApiResponse<MovieSearchResult>> SearchMovies(MovieSearchFilter filter);
+    public Task<ApiResponse<MovieSearchResult>> SearchMovies(MovieSearchFilter filter);
 }

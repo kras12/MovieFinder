@@ -19,6 +19,11 @@ public class MovieApiService : IMovieApiService
     #region Constants
 
     /// <summary>
+    /// The ID placeholder string. 
+    /// </summary>
+    private const string IdPlaceHolder = "{Id}";
+
+    /// <summary>
     /// The max page number allowed by the api when searching for movies. 
     /// </summary>
     private const int MaxPageNumberAllowedByApi = 500;
@@ -27,6 +32,11 @@ public class MovieApiService : IMovieApiService
     /// The API endpoint for movie category listing.
     /// </summary>
     private const string MovieCategoryListUrl = "https://api.themoviedb.org/3/genre/movie/list";
+
+    /// <summary>
+    /// The API endpoint for fetching movie images. 
+    /// </summary>
+    private const string MovieImagesUrl = $"https://api.themoviedb.org/3/movie/{IdPlaceHolder}/images";
 
     /// <summary>
     /// The API endpoint for movie searches.
@@ -101,6 +111,27 @@ public class MovieApiService : IMovieApiService
             Debug.WriteLine($"{ex.Message}");
             Debug.WriteLine($"{ex.StackTrace}");
             return CreateGeneralApiErrorResponse<MovieCategoryCollection>();
+        }
+    }
+
+    /// <summary>
+    /// Fetches the images for a movie.
+    /// </summary>
+    /// <param name="movieId">The ID of the movie.</param>
+    /// <returns><see cref="MovieImageSearchResult"/></returns>
+    public async Task<ApiResponse<MovieImageSearchResult>> GetMovieImages(int movieId)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync(MovieImagesUrl.Replace(IdPlaceHolder, movieId.ToString()));
+            return await HandleResponse<MovieImageSearchResult>(response);
+        }
+        catch (Exception ex)
+        {
+            // TODO - Logging
+            Debug.WriteLine($"{ex.Message}");
+            Debug.WriteLine($"{ex.StackTrace}");
+            return CreateGeneralApiErrorResponse<MovieImageSearchResult>();
         }
     }
 
