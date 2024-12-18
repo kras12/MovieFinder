@@ -181,7 +181,7 @@ public partial class MovieDiscoveryViewModel : ObservableObject, IMovieDiscovery
     {
         if (CanNavigateForwardInMovieSearchResult())
         {
-            // TODO - Max
+            // The API sets a limit of the maximum page number that can be requested. 
             MovieSearchFilter.Page = Math.Min(MovieSearchResult.TotalPages, _movieApiService.MaxNumberForPageRequest);
             await SearchMovies();
         }
