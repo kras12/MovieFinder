@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MovieFinder.Data.Helpers;
 using MovieFinder.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 
@@ -9,15 +10,6 @@ namespace MovieFinder.ViewModels;
 /// </summary>
 public partial class MovieViewModel : ObservableObject, IMovieViewModel
 {
-    #region Constants
-
-    /// <summary>
-    /// The base url path for fetching all movie images. 
-    /// </summary>
-    private const string ImageBasePath = "https://image.tmdb.org/t/p/w300"; // TODO - Move
-
-    #endregion
-
     #region Fields
 
     /// <summary>
@@ -120,7 +112,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
 
         init
         {
-            SetProperty(ref _backdropPath, value != null ? ConstructImagePath(value) : null);
+            SetProperty(ref _backdropPath, value != null ? MovieImageHelper.ConstructImagePath(value) : null);
         }
     }
 
@@ -203,7 +195,7 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     public string? PosterPath
     {
         get => _posterPath;
-        init => SetProperty(ref _posterPath, value != null ? ConstructImagePath(value) : null);
+        init => SetProperty(ref _posterPath, value != null ? MovieImageHelper.ConstructImagePath(value) : null);
     }
 
     /// <summary>
@@ -250,20 +242,6 @@ public partial class MovieViewModel : ObservableObject, IMovieViewModel
     {
         get => _voteCount;
         init => SetProperty(ref _voteCount, value);
-    }
-
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Returns the complete URL for a movie image. 
-    /// </summary>
-    /// <param name="relativeImagePath">The relative image URL path.</param>
-    /// <returns><see cref="string"/></returns>
-    private string ConstructImagePath(string relativeImagePath)
-    {
-        return $"{ImageBasePath}/{relativeImagePath.TrimStart(['/'])}";
     }
 
     #endregion
